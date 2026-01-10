@@ -333,6 +333,76 @@ function initializeOptionalScripts() {
 initializeOptionalScripts();
 
 // ==========================================
+// INTERACTIVE HERO CARDS (Cursor Tracking)
+// ==========================================
+
+const interactiveCards = document.querySelectorAll('[data-tilt]');
+
+if (interactiveCards.length > 0 && window.innerWidth > 768) {
+    interactiveCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.05)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+// ==========================================
+// STATS TICKER ANIMATION
+// ==========================================
+
+const statValues = document.querySelectorAll('.stat-value');
+
+function animateStats() {
+    statValues.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const updateCount = () => {
+            current += increment;
+            if (current < target) {
+                stat.textContent = Math.ceil(current);
+                requestAnimationFrame(updateCount);
+            } else {
+                stat.textContent = target;
+            }
+        };
+
+        updateCount();
+    });
+}
+
+// Trigger stats animation when hero comes into view
+const heroSection = document.querySelector('.hero-minimal');
+if (heroSection && statValues.length > 0) {
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statsObserver.observe(heroSection);
+}
+
+// ==========================================
 // CONSOLE MESSAGE
 // ==========================================
 

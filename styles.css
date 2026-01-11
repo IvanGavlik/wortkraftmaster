@@ -119,12 +119,35 @@ a {
 .btn-primary {
     background-color: var(--color-primary);
     color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.15s ease;
+    will-change: transform;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
 }
 
 .btn-primary:hover {
     background-color: #e63300;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 15px 30px -5px rgba(255, 55, 0, 0.4);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px -3px rgba(255, 55, 0, 0.3);
 }
 
 .btn-secondary {
@@ -281,6 +304,9 @@ button {
     color: var(--color-gray-700);
     margin-bottom: var(--spacing-lg);
     box-shadow: var(--shadow-sm);
+    opacity: 0;
+    animation: blurToFocus 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0s;
 }
 
 .badge-dot {
@@ -300,6 +326,62 @@ button {
     }
 }
 
+@keyframes fadeUpIn {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes blurToFocus {
+    0% {
+        opacity: 0;
+        filter: blur(20px);
+        transform: translateY(30px) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes underlineSlide {
+    0% {
+        width: 0%;
+        opacity: 0;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 55, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(255, 55, 0, 0.4);
+    }
+}
+
 .hero-title-creative {
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 700;
@@ -315,14 +397,49 @@ button {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    opacity: 0;
+    animation: blurToFocus 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.title-line:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.title-line:nth-child(2) {
+    animation-delay: 0.7s;
 }
 
 .text-black {
-    color: var(--color-black);
+    background: linear-gradient(
+        90deg,
+        #000000 0%,
+        #ff3700 25%,
+        #000000 50%,
+        #ff3700 75%,
+        #000000 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
 }
 
 .text-gray {
-    color: var(--color-gray-300);
+    background: linear-gradient(
+        90deg,
+        #d9d9d9 0%,
+        #404040 25%,
+        #d9d9d9 50%,
+        #404040 75%,
+        #d9d9d9 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    animation-delay: 1s;
 }
 
 .hero-title {
@@ -344,6 +461,29 @@ button {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    opacity: 0;
+    animation: blurToFocus 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 1.1s;
+}
+
+.underline-text {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.underline-text::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), #ff6b3d);
+    border-radius: 2px;
+    animation: underlineSlide 0.8s ease-out forwards;
+    animation-delay: 2.3s;
 }
 
 .hero-cta {
@@ -351,6 +491,18 @@ button {
     gap: var(--spacing-sm);
     flex-wrap: wrap;
     justify-content: center;
+    opacity: 0;
+    animation: blurToFocus 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 1.5s;
+}
+
+.hero-cta .btn-primary {
+    animation: blurToFocus 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, buttonPulse 2s ease-in-out 3s infinite;
+}
+
+.pricing-text .btn-primary {
+    animation: buttonPulse 2s ease-in-out infinite;
+    animation-delay: 0.5s;
 }
 
 /* ==========================================
@@ -530,13 +682,38 @@ button {
 
 /* Update text colors for video background */
 .hero-video .text-black {
-    color: var(--color-white);
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #ff3700 25%,
+        #ffffff 50%,
+        #ff3700 75%,
+        #ffffff 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.5));
 }
 
 .hero-video .text-gray {
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.6) 25%,
+        rgba(255, 255, 255, 0.9) 50%,
+        rgba(255, 255, 255, 0.6) 75%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    animation-delay: 1s;
+    filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.5));
 }
 
 .hero-video .hero-subtitle {
@@ -576,6 +753,99 @@ button {
 
 .hero-video .card-label {
     color: var(--color-white);
+}
+
+/* ==========================================
+   SPLIT HERO WITH VERTICAL VIDEO
+   ========================================== */
+
+.hero-split {
+    min-height: auto;
+    padding: calc(var(--spacing-md) + 4rem) 0 var(--spacing-lg);
+}
+
+.hero-split-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    min-height: auto;
+}
+
+.hero-text-side {
+    max-width: 600px;
+    text-align: left;
+}
+
+.hero-text-side .title-line {
+    justify-content: flex-start;
+}
+
+.hero-text-side .hero-subtitle {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.hero-text-side .hero-cta {
+    justify-content: flex-start;
+}
+
+.hero-video-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.hero-video-container {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 9 / 16;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    background: var(--color-black);
+    opacity: 0;
+    animation: blurToFocus 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.5s;
+}
+
+.hero-video-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.hero-video-container:hover::before {
+    opacity: 0.3;
+}
+
+.hero-vertical-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.7;
+    filter: blur(0.5px) brightness(0.85);
+    transition: all 0.5s ease;
+}
+
+.hero-video-container:hover .hero-vertical-video {
+    opacity: 0.95;
+    filter: blur(0px) brightness(1);
 }
 
 .hero-visual {
@@ -1577,6 +1847,30 @@ button {
         min-height: 65vh;
     }
 
+    /* Split Hero Tablet */
+    .hero-split-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .hero-text-side {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .hero-text-side .title-line {
+        justify-content: center;
+    }
+
+    .hero-text-side .hero-cta {
+        justify-content: center;
+    }
+
+    .hero-video-container {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
     .recent-work-columns {
         gap: var(--spacing-sm);
         height: 700px;
@@ -1725,6 +2019,42 @@ button {
             rgba(0, 0, 0, 0.1) 50%,
             rgba(0, 0, 0, 0.2) 100%
         );
+    }
+
+    /* Split Hero Mobile */
+    .hero-split {
+        min-height: auto;
+        padding: calc(var(--spacing-lg) + 3rem) 0 var(--spacing-md);
+    }
+
+    .hero-split-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        min-height: auto;
+    }
+
+    .hero-text-side {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .hero-text-side .title-line {
+        justify-content: center;
+    }
+
+    .hero-text-side .hero-cta {
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero-text-side .hero-cta .btn-large {
+        width: 100%;
+    }
+
+    .hero-video-container {
+        max-width: 300px;
+        margin: 0 auto;
     }
 
     .recent-work {

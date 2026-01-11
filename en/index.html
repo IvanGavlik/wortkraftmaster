@@ -36,34 +36,38 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero hero-minimal hero-video">
-        <!-- Background Video -->
-        <video class="hero-bg-video" autoplay muted loop playsinline>
-            <source src="../video/videoplayback.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <!-- Video Overlay for text readability -->
-        <div class="hero-video-overlay"></div>
-
+    <section class="hero hero-minimal hero-split">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    Available to work
-                </div>
-                <h1 class="hero-title-creative">
-                    <span class="title-line">
-                        <span class="text-black">Your Business,</span>
-                    </span>
-                    <span class="title-line">
-                        <span class="text-gray">Well-Presented</span>
-                    </span>
-                </h1>
-                <p class="hero-subtitle">Professional websites built to support real business goals.</p>
+            <div class="hero-split-content">
+                <!-- Left Side - Text Content -->
+                <div class="hero-text-side">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        Available to work
+                    </div>
+                    <h1 class="hero-title-creative">
+                        <span class="title-line">
+                            <span class="text-black">Your Business,</span>
+                        </span>
+                        <span class="title-line">
+                            <span class="text-gray">Well-Presented</span>
+                        </span>
+                    </h1>
+                    <p class="hero-subtitle">Professional websites built to support <span class="underline-text">your business goals</span>.</p>
 
-                <div class="hero-cta">
-                    <a href="https://calendly.com/ivangavlik963/30min" target="_blank" class="btn-primary btn-large">Book a Meeting</a>
+                    <div class="hero-cta">
+                        <a href="https://calendly.com/ivangavlik963/30min" target="_blank" class="btn-primary btn-large">Book a Meeting</a>
+                    </div>
+                </div>
+
+                <!-- Right Side - Video -->
+                <div class="hero-video-side">
+                    <div class="hero-video-container">
+                        <video class="hero-vertical-video" autoplay muted playsinline id="heroVideo">
+                            <source src="" type="video/mp4" id="videoSource">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 </div>
             </div>
         </div>

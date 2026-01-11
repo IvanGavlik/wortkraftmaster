@@ -1,4 +1,44 @@
 // ==========================================
+// SEQUENTIAL VIDEO PLAYBACK
+// ==========================================
+
+// Detect if we're in a subfolder (like /en/)
+const isInSubfolder = window.location.pathname.includes('/en/');
+const videoBasePath = isInSubfolder ? '../video/' : 'video/';
+
+// Array of video sources in order
+const videoSources = [
+    videoBasePath + 'videoplayback.mp4',
+    videoBasePath + 'videoplayback-1.mp4'
+];
+
+let currentVideoIndex = 0;
+
+// Get video elements
+const videoSource = document.getElementById('videoSource');
+const heroVideo = document.getElementById('heroVideo');
+
+// Function to load and play a video
+function playVideo(index) {
+    if (videoSource && heroVideo) {
+        videoSource.src = videoSources[index];
+        heroVideo.load();
+        heroVideo.play().catch(err => console.log('Autoplay prevented:', err));
+    }
+}
+
+// Play the first video on page load
+playVideo(currentVideoIndex);
+
+// When current video ends, play the next one
+if (heroVideo) {
+    heroVideo.addEventListener('ended', () => {
+        currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
+        playVideo(currentVideoIndex);
+    });
+}
+
+// ==========================================
 // MOBILE MENU TOGGLE
 // ==========================================
 
@@ -102,7 +142,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all process steps, work items, and sections
-const animatedElements = document.querySelectorAll('.services-center, .process-step, .work-item, .about-content, .contact-content');
+const animatedElements = document.querySelectorAll('.services-center, .process-step, .work-item, .about-content, .contact-content, .pricing-text, .pricing-card');
 animatedElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -401,6 +441,30 @@ if (heroSection && statValues.length > 0) {
 
     statsObserver.observe(heroSection);
 }
+
+// ==========================================
+// MAGNETIC BUTTON EFFECT
+// ==========================================
+
+const magneticButtons = document.querySelectorAll('.btn-primary');
+
+magneticButtons.forEach(button => {
+    button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        // Limit the movement to make it subtle
+        const moveX = x * 0.3;
+        const moveY = y * 0.3;
+
+        button.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+    });
+
+    button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translate(0, 0) scale(1)';
+    });
+});
 
 // ==========================================
 // CONSOLE MESSAGE

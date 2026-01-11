@@ -382,6 +382,38 @@ button {
     }
 }
 
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(40px);
+    }
+    50% {
+        transform: scale(1.05) translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
 .hero-title-creative {
     font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 700;
@@ -1270,9 +1302,17 @@ button {
     padding: var(--spacing-md);
     background-color: var(--color-white);
     border-radius: var(--radius-xl);
-    transition: all var(--transition-base);
+    transition: all 0.3s ease;
     border: 1px solid var(--color-gray-200);
     box-shadow: var(--shadow-md);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    opacity: 0;
+    transform: scale(0.8) translateY(40px);
+}
+
+.process-step.pop-in {
+    animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .process-step:nth-child(1) {
@@ -1291,10 +1331,27 @@ button {
     margin-top: 0;
 }
 
+.process-step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 55, 0, 0.05), transparent);
+    border-radius: var(--radius-xl);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.process-step:hover::before {
+    opacity: 1;
+}
+
 .process-step:hover {
-    transform: translateY(-8px);
     box-shadow: var(--shadow-xl);
-    border-color: var(--color-gray-300);
+    border-color: var(--color-primary);
 }
 
 .process-number {
@@ -1307,6 +1364,11 @@ button {
     opacity: 1;
     line-height: 1;
     font-family: var(--font-display);
+    transition: transform 0.3s ease;
+}
+
+.process-step:hover .process-number {
+    transform: scale(1.1);
 }
 
 .process-title {
@@ -1407,15 +1469,36 @@ button {
     z-index: 2;
 }
 
+.about-text .about-description {
+    min-height: 3em;
+}
+
 .about-text {
     max-width: 600px;
 }
 
 .about-description {
+    font-family: var(--font-primary);
     font-size: 1.125rem;
+    font-weight: 400;
     color: var(--color-gray-700);
     line-height: 1.8;
     margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.about-description.typing::after {
+    content: '|';
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    animation: blink 0.8s step-end infinite;
+    margin-left: 3px;
+    display: inline-block;
+}
+
+.about-description.typing-complete::after {
+    display: none;
 }
 
 .about-stats {
@@ -1554,6 +1637,33 @@ button {
     margin-bottom: var(--spacing-lg);
 }
 
+.pricing-title-creative {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pricing-title-creative .title-line {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: blurToFocus 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.pricing-title-creative .title-line:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.pricing-title-creative .title-line:nth-child(2) {
+    animation-delay: 0.7s;
+}
+
 .pricing-card {
     background-color: var(--color-white);
     border: 1px solid var(--color-gray-200);
@@ -1601,6 +1711,31 @@ button {
     color: var(--color-gray-700);
 }
 
+@keyframes featureFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes checkmarkBounce {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .pricing-features {
     list-style: none;
     margin: 0;
@@ -1614,6 +1749,12 @@ button {
     line-height: 1.6;
     position: relative;
     padding-left: var(--spacing-lg);
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.pricing-features li.animate {
+    animation: featureFadeIn 0.5s ease-out forwards;
 }
 
 .pricing-features li::before {
@@ -1622,6 +1763,14 @@ button {
     left: 0;
     color: var(--color-primary);
     font-weight: 700;
+    font-size: 1.25rem;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.pricing-features li.animate::before {
+    animation: checkmarkBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: 0.3s;
 }
 
 /* ==========================================

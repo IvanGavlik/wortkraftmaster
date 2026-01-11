@@ -141,8 +141,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all process steps, work items, and sections
-const animatedElements = document.querySelectorAll('.services-center, .process-step, .work-item, .about-content, .contact-content, .pricing-text, .pricing-card');
+// Observe all process steps, work items, and sections (excluding about-content for typewriter)
+const animatedElements = document.querySelectorAll('.services-center, .process-step, .work-item, .contact-content, .pricing-text, .pricing-card');
 animatedElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -346,15 +346,6 @@ if (acceptNecessaryButton) {
     });
 }
 
-// Add slideDown animation
-const styleSheet = document.styleSheets[0];
-styleSheet.insertRule(`
-    @keyframes slideDown {
-        from { transform: translateY(0); }
-        to { transform: translateY(100%); }
-    }
-`, styleSheet.cssRules.length);
-
 // Optional: Function to load analytics only if user accepted all cookies
 function initializeOptionalScripts() {
     const preference = localStorage.getItem('cookiePreference');
@@ -443,6 +434,134 @@ if (heroSection && statValues.length > 0) {
 }
 
 // ==========================================
+// PROCESS CARDS SCROLL-TRIGGERED POP-IN
+// ==========================================
+
+const processCards = document.querySelectorAll('.process-step');
+
+const processObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            // Get the card index from all process cards
+            const cardIndex = Array.from(processCards).indexOf(entry.target);
+            // Stagger the animation based on index
+            setTimeout(() => {
+                entry.target.classList.add('pop-in');
+            }, cardIndex * 150); // 150ms delay between each card
+
+            // Unobserve after animation
+            processObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.2,
+    rootMargin: '0px'
+});
+
+processCards.forEach(card => {
+    processObserver.observe(card);
+});
+
+// ==========================================
+// PROCESS CARDS 3D TILT EFFECT
+// ==========================================
+
+processCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+});
+
+// ==========================================
+// TYPEWRITER EFFECT FOR ABOUT SECTION
+// ==========================================
+
+function typeWriter(element, text, speed = 30) {
+    return new Promise((resolve) => {
+        let index = 0;
+        element.textContent = '';
+        element.classList.add('typing');
+
+        function type() {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, speed);
+            } else {
+                element.classList.remove('typing');
+                element.classList.add('typing-complete');
+                resolve();
+            }
+        }
+
+        type();
+    });
+}
+
+const aboutObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        console.log('About section intersecting:', entry.isIntersecting, 'Already typed:', entry.target.dataset.typed);
+
+        if (entry.isIntersecting && !entry.target.dataset.typed) {
+            entry.target.dataset.typed = 'true';
+            console.log('Starting typewriter animation...');
+
+            const aboutText = entry.target.querySelector('.about-text');
+            const descriptions = aboutText.querySelectorAll('.about-description');
+            console.log('Found descriptions:', descriptions.length);
+
+            // Store original text and hide initially
+            descriptions.forEach((desc, idx) => {
+                if (!desc.dataset.originalText) {
+                    desc.dataset.originalText = desc.textContent.trim();
+                    console.log(`Description ${idx} text:`, desc.dataset.originalText.substring(0, 50) + '...');
+                }
+                desc.textContent = ''; // Clear immediately
+            });
+
+            // Type first paragraph
+            console.log('Typing paragraph 1...');
+            typeWriter(descriptions[0], descriptions[0].dataset.originalText, 25).then(() => {
+                console.log('Paragraph 1 complete, waiting 1s for paragraph 2...');
+                // Wait 1 second, then type second paragraph
+                setTimeout(() => {
+                    if (descriptions[1]) {
+                        console.log('Typing paragraph 2...');
+                        typeWriter(descriptions[1], descriptions[1].dataset.originalText, 25);
+                    }
+                }, 1000);
+            });
+
+            aboutObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.2,
+    rootMargin: '0px'
+});
+
+const aboutSection = document.querySelector('.about-content');
+console.log('About section found:', !!aboutSection);
+if (aboutSection) {
+    aboutObserver.observe(aboutSection);
+    console.log('Observer attached to about section');
+}
+
+// ==========================================
 // MAGNETIC BUTTON EFFECT
 // ==========================================
 
@@ -464,6 +583,37 @@ magneticButtons.forEach(button => {
     button.addEventListener('mouseleave', () => {
         button.style.transform = 'translate(0, 0) scale(1)';
     });
+});
+
+// ==========================================
+// PRICING FEATURES ANIMATED CHECKMARKS
+// ==========================================
+
+const pricingCardsWithFeatures = document.querySelectorAll('.pricing-card');
+
+const pricingFeaturesObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = 'true';
+
+            const features = entry.target.querySelectorAll('.pricing-features li');
+
+            features.forEach((feature, index) => {
+                setTimeout(() => {
+                    feature.classList.add('animate');
+                }, index * 100); // 100ms stagger between each feature
+            });
+
+            pricingFeaturesObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.2,
+    rootMargin: '0px'
+});
+
+pricingCardsWithFeatures.forEach(card => {
+    pricingFeaturesObserver.observe(card);
 });
 
 // ==========================================

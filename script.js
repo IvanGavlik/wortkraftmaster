@@ -524,27 +524,37 @@ const aboutObserver = new IntersectionObserver((entries) => {
             const descriptions = aboutText.querySelectorAll('.about-description');
             console.log('Found descriptions:', descriptions.length);
 
-            // Store original text and hide initially
+            // Store original text
             descriptions.forEach((desc, idx) => {
                 if (!desc.dataset.originalText) {
                     desc.dataset.originalText = desc.textContent.trim();
                     console.log(`Description ${idx} text:`, desc.dataset.originalText.substring(0, 50) + '...');
                 }
-                desc.textContent = ''; // Clear immediately
             });
 
-            // Type first paragraph
-            console.log('Typing paragraph 1...');
-            typeWriter(descriptions[0], descriptions[0].dataset.originalText, 25).then(() => {
-                console.log('Paragraph 1 complete, waiting 1s for paragraph 2...');
-                // Wait 1 second, then type second paragraph
-                setTimeout(() => {
-                    if (descriptions[1]) {
-                        console.log('Typing paragraph 2...');
-                        typeWriter(descriptions[1], descriptions[1].dataset.originalText, 25);
-                    }
-                }, 1000);
-            });
+            function runLoop() {
+                // Clear all paragraphs before each run
+                descriptions.forEach(desc => { desc.textContent = ''; });
+
+                // Type first paragraph
+                console.log('Typing paragraph 1...');
+                typeWriter(descriptions[0], descriptions[0].dataset.originalText, 25).then(() => {
+                    console.log('Paragraph 1 complete, waiting 1s for paragraph 2...');
+                    setTimeout(() => {
+                        if (descriptions[1]) {
+                            console.log('Typing paragraph 2...');
+                            typeWriter(descriptions[1], descriptions[1].dataset.originalText, 25).then(() => {
+                                // Wait 3 seconds, then restart from the beginning
+                                setTimeout(runLoop, 3000);
+                            });
+                        } else {
+                            setTimeout(runLoop, 3000);
+                        }
+                    }, 1000);
+                });
+            }
+
+            runLoop();
 
             aboutObserver.unobserve(entry.target);
         }
@@ -614,6 +624,58 @@ const pricingFeaturesObserver = new IntersectionObserver((entries) => {
 
 pricingCardsWithFeatures.forEach(card => {
     pricingFeaturesObserver.observe(card);
+});
+
+// ==========================================
+// CASE STUDY CUSTOM CURSOR
+// ==========================================
+
+const csCursor = document.getElementById('csCursor');
+
+if (csCursor) {
+    let cursorX = 0, cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        cursorX = e.clientX;
+        cursorY = e.clientY;
+        csCursor.style.left = cursorX + 'px';
+        csCursor.style.top  = cursorY + 'px';
+    });
+
+    document.querySelectorAll('.case-study-card').forEach(card => {
+        card.addEventListener('mouseenter', () => csCursor.classList.add('visible'));
+        card.addEventListener('mouseleave', () => csCursor.classList.remove('visible'));
+    });
+}
+
+// ==========================================
+// CASE STUDIES — entrance + tilt animations
+// ==========================================
+
+// Entrance: trigger slide-in when section scrolls into view
+const csCaseItems = document.querySelectorAll('.cs-case-left, .cs-case-right');
+if (csCaseItems.length > 0) {
+    const csEntranceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('cs-animated')) {
+                entry.target.classList.add('cs-animated');
+                csEntranceObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    csCaseItems.forEach(item => csEntranceObserver.observe(item));
+}
+
+
+// ==========================================
+// CASE STUDY SCREENSHOTS — show real image if it loads
+// ==========================================
+
+document.querySelectorAll('.cs-screenshot').forEach(img => {
+    img.addEventListener('load', () => img.classList.add('loaded'));
+    // If already cached and loaded
+    if (img.complete && img.naturalWidth > 0) img.classList.add('loaded');
 });
 
 // ==========================================

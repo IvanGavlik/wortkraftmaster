@@ -684,3 +684,22 @@ document.querySelectorAll('.cs-screenshot').forEach(img => {
 
 console.log('%c🎨 Wortkraftmaster Portfolio', 'font-size: 20px; font-weight: bold; color: #ff3700;');
 console.log('%cBuilt with modern web technologies', 'font-size: 12px; color: #666;');
+
+// ==========================================
+// MERGED SHOWCASE — entrance animations
+// ==========================================
+
+const mergedItems = document.querySelectorAll('.merged-entrance-left, .merged-entrance-right');
+
+if (mergedItems.length > 0) {
+    const mergedEntranceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('merged-animated')) {
+                entry.target.classList.add('merged-animated');
+                mergedEntranceObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    mergedItems.forEach(item => mergedEntranceObserver.observe(item));
+}

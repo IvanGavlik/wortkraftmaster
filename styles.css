@@ -2668,6 +2668,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 2rem;
     padding: 0 0.25rem;
 }
 
@@ -2790,4 +2791,109 @@ button {
 
 .case-study-card {
     cursor: none;
+}
+
+/* ==========================================
+   MERGED SHOWCASE SECTION
+   ========================================== */
+
+.merged-showcase {
+    background-color: var(--color-gray-100);
+    overflow: hidden;
+    padding-top: var(--spacing-xl);
+}
+
+.merged-showcase .section-header {
+    margin-bottom: 0;
+}
+
+.merged-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+}
+
+.merged-col {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 4rem;
+}
+
+.merged-col-left {
+    justify-content: center;
+}
+
+.merged-col-right {
+    justify-content: center;
+    align-items: center;
+}
+
+.merged-divider {
+    background-color: var(--color-gray-300);
+    align-self: stretch;
+}
+
+/* Entrance animations — reuse the cs-slide keyframes */
+.merged-entrance-left {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.merged-entrance-right {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.merged-entrance-left.merged-animated {
+    animation: cs-slide-left 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.merged-entrance-right.merged-animated {
+    animation: cs-slide-right 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Float on the monitor — starts after slide-in completes */
+.merged-entrance-right.merged-animated .cs-monitor-wrap {
+    animation: cs-float 4s 0.75s ease-in-out infinite;
+}
+
+/* Responsive — Tablet */
+@media (max-width: 1024px) {
+    .merged-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .merged-divider {
+        width: 100%;
+        height: 1px;
+        align-self: auto;
+    }
+
+    .merged-col {
+        padding: 3rem 2.5rem;
+        justify-content: flex-start;
+    }
+
+    .merged-col-right {
+        align-items: flex-start;
+    }
+}
+
+/* Responsive — Mobile */
+@media (max-width: 768px) {
+    .merged-col {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .merged-entrance-left,
+    .merged-entrance-right {
+        opacity: 1;
+        transform: none;
+        animation: none !important;
+    }
+
+    .merged-entrance-right.merged-animated .cs-monitor-wrap {
+        animation: none;
+    }
 }

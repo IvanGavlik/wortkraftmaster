@@ -3,7 +3,7 @@
 // ==========================================
 
 // Detect if we're in a subfolder (like /en/)
-const isInSubfolder = window.location.pathname.includes('/en/');
+const isInSubfolder = window.location.pathname.includes('/en/') || window.location.pathname.includes('/de/');
 const videoBasePath = isInSubfolder ? '../video/' : 'video/';
 
 // Array of video sources in order

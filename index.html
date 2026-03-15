@@ -13,6 +13,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Fira+Mono&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+
+    <script>
+        // Geo-redirect: send DE/AT visitors to the German version
+        (function () {
+            // Don't redirect if the user already navigated here manually this session
+            if (sessionStorage.getItem('geoRedirectDone')) return;
+
+            // Mark as done so clicking a language flag and coming back won't loop
+            sessionStorage.setItem('geoRedirectDone', '1');
+
+            fetch('https://ipapi.co/json/')
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    if (data.country_code === 'DE' || data.country_code === 'AT') {
+                        window.location.replace('de/index.html');
+                    }
+                })
+                .catch(function () {
+                    // API unavailable — fall back to browser language
+                    var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+                    if (lang.startsWith('de')) {
+                        window.location.replace('de/index.html');
+                    }
+                });
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -538,13 +564,20 @@
                                 </g>
                             </svg>
                         </a>
-                        <a href="en/index.html" style="display: inline-block;">
+                        <a href="en/index.html" style="display: inline-block; margin-right: 10px;">
                             <svg width="24" height="18" viewBox="0 0 24 18" style="vertical-align: middle;">
                                 <rect width="24" height="18" fill="#012169"/>
                                 <path d="M0 0 L24 18 M24 0 L0 18" stroke="#fff" stroke-width="3.6"/>
                                 <path d="M0 0 L24 18 M24 0 L0 18" stroke="#C8102E" stroke-width="2.4"/>
                                 <path d="M12 0 V18 M0 9 H24" stroke="#fff" stroke-width="6"/>
                                 <path d="M12 0 V18 M0 9 H24" stroke="#C8102E" stroke-width="3.6"/>
+                            </svg>
+                        </a>
+                        <a href="de/index.html" style="display: inline-block;">
+                            <svg width="24" height="18" viewBox="0 0 24 18" style="vertical-align: middle;">
+                                <rect width="24" height="6" fill="#000000"/>
+                                <rect y="6" width="24" height="6" fill="#DD0000"/>
+                                <rect y="12" width="24" height="6" fill="#FFCE00"/>
                             </svg>
                         </a>
                     </p>

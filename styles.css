@@ -3083,6 +3083,19 @@ button {
     margin: 0;
 }
 
+.dialog-error {
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.dialog-submit.is-loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 @media (max-width: 480px) {
     .dialog {
         padding: 2rem 1.5rem;

@@ -743,17 +743,55 @@ document.addEventListener('keydown', (e) => {
 });
 
 if (dialogForm) {
-    dialogForm.addEventListener('submit', (e) => {
+    const dialogSubmit = dialogForm.querySelector('.dialog-submit');
+    const dialogError  = document.getElementById('dialogError');
+
+    function showDialogError(msg) {
+        if (dialogError) { dialogError.textContent = msg; dialogError.hidden = false; }
+    }
+    function clearDialogError() {
+        if (dialogError) dialogError.hidden = true;
+    }
+
+    dialogForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        clearDialogError();
+
         const type     = document.getElementById('d-type').value;
         const existing = document.getElementById('d-existing').value;
         const contact  = document.getElementById('d-contact').value.trim();
 
-        const subject = encodeURIComponent(`Upit: ${type}`);
-        const body    = encodeURIComponent(`Što treba: ${type}\nPostoji li web: ${existing}\nKontakt: ${contact}`);
-        window.location.href = `mailto:info@wortkraftmaster.org?subject=${subject}&body=${body}`;
+        dialogSubmit.classList.add('is-loading');
+        dialogSubmit.disabled = true;
 
-        dialogForm.style.display = 'none';
-        dialogSuccess.style.display = 'flex';
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+
+        try {
+            const res = await fetch('https://web-compose.onrender.com/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    'app-id': 'wortkraftmaster',
+                    'service-id': 'contact',
+                    name: contact,
+                    email: isEmail ? contact : 'noreply@wortkraftmaster.org',
+                    message: `Što treba: ${type}\nPostoji li web: ${existing}\nKontakt: ${contact}`,
+                }),
+            });
+
+            if (res.ok) {
+                dialogForm.style.display = 'none';
+                dialogSuccess.style.display = 'flex';
+            } else if (res.status === 429) {
+                showDialogError('Previše zahtjeva. Pokušajte za nekoliko minuta.');
+            } else {
+                showDialogError('Došlo je do pogreške. Molimo pokušajte ponovno.');
+            }
+        } catch {
+            showDialogError('Nije moguće uspostaviti vezu. Provjerite internetsku vezu.');
+        } finally {
+            dialogSubmit.classList.remove('is-loading');
+            dialogSubmit.disabled = false;
+        }
     });
 }

@@ -712,8 +712,6 @@ const dialogOverlay = document.getElementById('dialogOverlay');
 const dialogClose  = document.getElementById('dialogClose');
 const dialogForm   = document.getElementById('dialogForm');
 const dialogSuccess = document.getElementById('dialogSuccess');
-const openDialogBtn = document.getElementById('openDialogBtn');
-
 function openDialog() {
     if (!dialogOverlay) return;
     dialogOverlay.classList.add('open');
@@ -726,7 +724,7 @@ function closeDialog() {
     document.body.style.overflow = '';
 }
 
-if (openDialogBtn) openDialogBtn.addEventListener('click', openDialog);
+document.querySelectorAll('.js-open-dialog').forEach(btn => btn.addEventListener('click', openDialog));
 
 if (dialogOverlay) {
     dialogOverlay.addEventListener('click', (e) => {
@@ -745,6 +743,21 @@ document.addEventListener('keydown', (e) => {
 if (dialogForm) {
     const dialogSubmit = dialogForm.querySelector('.dialog-submit');
     const dialogError  = document.getElementById('dialogError');
+
+    const lang = document.documentElement.lang;
+    const dialogMsg = lang === 'en' ? {
+        tooMany:    'Too many requests. Please try again in a few minutes.',
+        error:      'Something went wrong. Please try again.',
+        noConn:     'Unable to connect. Please check your internet connection.',
+    } : lang === 'de' ? {
+        tooMany:    'Zu viele Anfragen. Bitte versuche es in ein paar Minuten erneut.',
+        error:      'Ein Fehler ist aufgetreten. Bitte versuche es erneut.',
+        noConn:     'Keine Verbindung möglich. Bitte überprüfe deine Internetverbindung.',
+    } : {
+        tooMany:    'Previše zahtjeva. Pokušajte za nekoliko minuta.',
+        error:      'Došlo je do pogreške. Molimo pokušajte ponovno.',
+        noConn:     'Nije moguće uspostaviti vezu. Provjerite internetsku vezu.',
+    };
 
     function showDialogError(msg) {
         if (dialogError) { dialogError.textContent = msg; dialogError.hidden = false; }
@@ -783,12 +796,12 @@ if (dialogForm) {
                 dialogForm.style.display = 'none';
                 dialogSuccess.style.display = 'flex';
             } else if (res.status === 429) {
-                showDialogError('Previše zahtjeva. Pokušajte za nekoliko minuta.');
+                showDialogError(dialogMsg.tooMany);
             } else {
-                showDialogError('Došlo je do pogreške. Molimo pokušajte ponovno.');
+                showDialogError(dialogMsg.error);
             }
         } catch {
-            showDialogError('Nije moguće uspostaviti vezu. Provjerite internetsku vezu.');
+            showDialogError(dialogMsg.noConn);
         } finally {
             dialogSubmit.classList.remove('is-loading');
             dialogSubmit.disabled = false;

@@ -56,7 +56,7 @@
                     <p class="hero-subtitle">Professionelle Websites, entwickelt um <span class="underline-text">Ihre Geschäftsziele</span> zu unterstützen.</p>
 
                     <div class="hero-cta">
-                        <a href="https://calendly.com/ivangavlik963/30min" target="_blank" class="btn-primary btn-large">Termin buchen</a>
+                        <a href="#pricing" class="btn-primary btn-large">Preise ansehen</a>
                     </div>
                 </div>
 
@@ -384,7 +384,7 @@
                         Ein einfacher Preis. <span class="underline-text">Unbegrenzte Anfragen. Unbegrenzte Überarbeitungen.</span>
                         Jederzeit pausieren oder kündigen.
                     </p>
-                    <a href="https://calendly.com/ivangavlik963/30min" target="_blank" class="btn-primary btn-large">Termin buchen</a>
+                    <button type="button" class="btn-primary btn-large js-open-dialog">Sag was du brauchst</button>
                 </div>
                 <div class="pricing-card" data-plan="web-design">
                     <div class="pricing-header">
@@ -512,6 +512,63 @@
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+    </div>
+
+    <!-- Contact Dialog -->
+    <div class="dialog-overlay" id="dialogOverlay">
+        <div class="dialog" id="contactDialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+            <button class="dialog-close" id="dialogClose" aria-label="Schließen">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <h3 class="dialog-title" id="dialogTitle">Sag was du brauchst</h3>
+            <p class="dialog-subtitle">Ich antworte innerhalb von 24 Stunden.</p>
+            <form class="dialog-form" id="dialogForm">
+                <div class="dialog-field">
+                    <label class="dialog-label" for="d-type">Was brauchst du?</label>
+                    <div class="dialog-select-wrap">
+                        <select id="d-type" name="type" class="dialog-select" required>
+                            <option value="" disabled selected>Auswählen...</option>
+                            <option value="Landing Page">Landing Page</option>
+                            <option value="Website">Website</option>
+                            <option value="Webshop">Webshop</option>
+                        </select>
+                        <svg class="dialog-select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dialog-field">
+                    <label class="dialog-label" for="d-existing">Hast du bereits eine Website?</label>
+                    <div class="dialog-select-wrap">
+                        <select id="d-existing" name="existing" class="dialog-select" required>
+                            <option value="" disabled selected>Auswählen...</option>
+                            <option value="Ja">Ja</option>
+                            <option value="Nein">Nein</option>
+                        </select>
+                        <svg class="dialog-select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dialog-field">
+                    <label class="dialog-label" for="d-contact">Kontakt</label>
+                    <input type="text" id="d-contact" name="contact" class="dialog-input" placeholder="Telefonnummer oder E-Mail" required>
+                </div>
+                <p class="dialog-error" id="dialogError" hidden></p>
+                <button type="submit" class="dialog-submit">Senden →</button>
+            </form>
+            <div class="dialog-success" id="dialogSuccess">
+                <div class="dialog-success-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M6 14l6 6 10-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h4>Erhalten!</h4>
+                <p>Ich melde mich bald.</p>
+            </div>
+        </div>
     </div>
 
     <script src="../script.js"></script>

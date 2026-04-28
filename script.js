@@ -703,3 +703,57 @@ if (mergedItems.length > 0) {
 
     mergedItems.forEach(item => mergedEntranceObserver.observe(item));
 }
+
+// ==========================================
+// CONTACT DIALOG
+// ==========================================
+
+const dialogOverlay = document.getElementById('dialogOverlay');
+const dialogClose  = document.getElementById('dialogClose');
+const dialogForm   = document.getElementById('dialogForm');
+const dialogSuccess = document.getElementById('dialogSuccess');
+const openDialogBtn = document.getElementById('openDialogBtn');
+
+function openDialog() {
+    if (!dialogOverlay) return;
+    dialogOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDialog() {
+    if (!dialogOverlay) return;
+    dialogOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+if (openDialogBtn) openDialogBtn.addEventListener('click', openDialog);
+
+if (dialogOverlay) {
+    dialogOverlay.addEventListener('click', (e) => {
+        if (e.target === dialogOverlay) closeDialog();
+    });
+}
+
+if (dialogClose) dialogClose.addEventListener('click', closeDialog);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dialogOverlay && dialogOverlay.classList.contains('open')) {
+        closeDialog();
+    }
+});
+
+if (dialogForm) {
+    dialogForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const type     = document.getElementById('d-type').value;
+        const existing = document.getElementById('d-existing').value;
+        const contact  = document.getElementById('d-contact').value.trim();
+
+        const subject = encodeURIComponent(`Upit: ${type}`);
+        const body    = encodeURIComponent(`Što treba: ${type}\nPostoji li web: ${existing}\nKontakt: ${contact}`);
+        window.location.href = `mailto:info@wortkraftmaster.org?subject=${subject}&body=${body}`;
+
+        dialogForm.style.display = 'none';
+        dialogSuccess.style.display = 'flex';
+    });
+}

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web dizajn za računovodstvene urede i servisne tvrtke. Profesionalne web stranice koje grade povjerenje i privlače nove klijente.">
+    <title>Web dizajn za računovodstvene servise | Wortkraftmaster</title>
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Fira+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero-split-content {
+            grid-template-columns: 3fr 2fr;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;"><img src="images/logo.svg" alt="Wortkraftmaster" style="height: 40px;">Wortkraftmaster</a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Wortkraftmaster</a></li>
+                    <li><a href="index.html#services">Rad</a></li>
+                    <li><a href="index.html#pricing">Usluge</a></li>
+                    <li><a href="index.html#about">O meni</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero hero-minimal hero-split">
+        <div class="container">
+            <div class="hero-split-content">
+                <!-- Left Side - Text Content -->
+                <div class="hero-text-side">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        Dostupan za rad
+                    </div>
+                    <h1 class="hero-title-creative">
+                        <span class="title-line">
+                            <span class="text-black">Vaš ugled zaslužuje</span>
+                        </span>
+                        <span class="title-line">
+                            <span class="text-gray">više od zastarjele <span style="white-space: nowrap;">web stranice</span></span>
+                        </span>
+                    </h1>
+                    <p class="hero-subtitle">Izađujem moderne web stranice za računovodstvene i knjigovodstvene servise koji žele izgledati <span class="underline-text">jednako profesionalno</span> kao što rade svoj posao.</p>
+
+                    <div class="hero-cta">
+                        <button type="button" class="btn-primary btn-large js-open-dialog">Zatražite besplatnu analizu web stranice</button>
+                    </div>
+                </div>
+
+                <!-- Right Side - Video -->
+                <div class="hero-video-side">
+                    <div class="hero-video-container">
+                        <video class="hero-vertical-video" autoplay muted playsinline id="heroVideo">
+                            <source src="" type="video/mp4" id="videoSource">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="logo">Wortkraftmaster</h3>
+                    <p>Wortkraftmaster<br>obrt za računalno programiranje i poučavanje<br>vl. Ivan Gavlik<br>Rijeka, Plješevička 12 B<br>info@wortkraftmaster.org</p>
+                    <p style="margin-top: 15px;">
+                        <a href="index.html" style="display: inline-block; margin-right: 10px;">
+                            <svg width="24" height="18" viewBox="0 0 24 18" style="vertical-align: middle;">
+                                <rect width="24" height="6" fill="#FF0000"/>
+                                <rect y="6" width="24" height="6" fill="#FFFFFF"/>
+                                <rect y="12" width="24" height="6" fill="#0000FF"/>
+                                <g transform="translate(12, 9)">
+                                    <rect x="-2.5" y="-3" width="5" height="6" fill="#FFFFFF" stroke="#000" stroke-width="0.2"/>
+                                    <rect x="-2.5" y="-3" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="-0.5" y="-3" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="1.5" y="-3" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="-1.5" y="-1.8" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="0.5" y="-1.8" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="-2.5" y="-0.6" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="-0.5" y="-0.6" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="1.5" y="-0.6" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="-1.5" y="0.6" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="0.5" y="0.6" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="-2.5" y="1.8" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="-0.5" y="1.8" width="1" height="1.2" fill="#FF0000"/>
+                                    <rect x="1.5" y="1.8" width="1" height="1.2" fill="#FF0000"/>
+                                </g>
+                            </svg>
+                        </a>
+                        <a href="en/index.html" style="display: inline-block; margin-right: 10px;">
+                            <svg width="24" height="18" viewBox="0 0 24 18" style="vertical-align: middle;">
+                                <rect width="24" height="18" fill="#012169"/>
+                                <path d="M0 0 L24 18 M24 0 L0 18" stroke="#fff" stroke-width="3.6"/>
+                                <path d="M0 0 L24 18 M24 0 L0 18" stroke="#C8102E" stroke-width="2.4"/>
+                                <path d="M12 0 V18 M0 9 H24" stroke="#fff" stroke-width="6"/>
+                                <path d="M12 0 V18 M0 9 H24" stroke="#C8102E" stroke-width="3.6"/>
+                            </svg>
+                        </a>
+                        <a href="de/index.html" style="display: inline-block;">
+                            <svg width="24" height="18" viewBox="0 0 24 18" style="vertical-align: middle;">
+                                <rect width="24" height="6" fill="#000000"/>
+                                <rect y="6" width="24" height="6" fill="#DD0000"/>
+                                <rect y="12" width="24" height="6" fill="#FFCE00"/>
+                            </svg>
+                        </a>
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Usluge</h4>
+                        <ul>
+                            <li><a href="#pricing">Web dizajn od nule</a></li>
+                            <li><a href="#pricing">Unapređenje postojeće web stranice</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Pravno</h4>
+                        <ul>
+                            <li><a href="uvjeti-koristenja.html">Uvjeti korištenja</a></li>
+                            <li><a href="politika-privatnosti.html">Politika privatnosti</a></li>
+                            <li><a href="opci-uvjeti-poslovanja.html">Opći uvjeti poslovanja</a></li>
+                            <li><a href="kolacici.html">Kolačići</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Wortkraftmaster. Sva prava pridržana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <p>Ova web stranica koristi kolačiće kako bi poboljšala korisničko iskustvo. <a href="kolacici.html">Saznajte više</a></p>
+            <div class="cookie-buttons">
+                <button id="acceptNecessary" class="btn-secondary">Samo nužni</button>
+                <button id="acceptAll" class="btn-primary">Prihvati sve</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Dialog -->
+    <div class="dialog-overlay" id="dialogOverlay">
+        <div class="dialog" id="contactDialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+            <button class="dialog-close" id="dialogClose" aria-label="Zatvori">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <h3 class="dialog-title" id="dialogTitle">Reci što trebaš</h3>
+            <p class="dialog-subtitle">Odgovorit ću u roku od 24 sata.</p>
+            <form class="dialog-form" id="dialogForm">
+                <div class="dialog-field">
+                    <label class="dialog-label" for="d-type">Što ti treba?</label>
+                    <div class="dialog-select-wrap">
+                        <select id="d-type" name="type" class="dialog-select" required>
+                            <option value="" disabled selected>Odaberi...</option>
+                            <option value="Landing page">Landing page</option>
+                            <option value="Web stranica">Web stranica</option>
+                            <option value="Web shop">Web shop</option>
+                        </select>
+                        <svg class="dialog-select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dialog-field">
+                    <label class="dialog-label" for="d-existing">Imaš li već web?</label>
+                    <div class="dialog-select-wrap">
+                        <select id="d-existing" name="existing" class="dialog-select" required>
+                            <option value="" disabled selected>Odaberi...</option>
+                            <option value="Da">Da</option>
+                            <option value="Ne">Ne</option>
+                        </select>
+                        <svg class="dialog-select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="dialog-field">
+                    <label class="dialog-label" for="d-contact">Kontakt</label>
+                    <input type="text" id="d-contact" name="contact" class="dialog-input" placeholder="Tel. broj ili email" required>
+                </div>
+                <p class="dialog-error" id="dialogError" hidden></p>
+                <button type="submit" class="dialog-submit">Pošalji →</button>
+            </form>
+            <div class="dialog-success" id="dialogSuccess">
+                <div class="dialog-success-icon">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <path d="M6 14l6 6 10-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h4>Primljeno!</h4>
+                <p>Javit ću se uskoro.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

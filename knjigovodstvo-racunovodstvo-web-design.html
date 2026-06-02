@@ -369,15 +369,29 @@
             line-height: 1.6;
         }
 
-        /* Left-side feature list is outside .pricing-card so the observer never fires */
-        .pricing-text .pricing-features li {
-            opacity: 1;
-            animation: none;
-            font-family: var(--font-primary);
-            font-size: 1.125rem;
-            font-weight: 400;
+        /* Remove gap and divider from free-analysis card header */
+        #free-analysis .pricing-header {
+            margin-bottom: var(--spacing-sm);
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* Manifesto blockquote style */
+        .pricing-manifesto {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .pricing-manifesto-item {
+            padding-left: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.15rem;
             color: var(--color-gray-700);
-            line-height: 1.8;
+            line-height: 1.75;
         }
 
         /* ---- Before/After Section ---- */
@@ -599,10 +613,14 @@
         }
 
         .faq-answer-inner p {
-            padding-bottom: var(--spacing-md);
             font-size: 1rem;
             color: var(--color-gray-700);
             line-height: 1.7;
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-answer-inner p:last-child {
+            margin-bottom: var(--spacing-md);
         }
 
         @media (max-width: 768px) {
@@ -1123,11 +1141,14 @@
                             <span class="text-gray">vaše web stranice</span>
                         </span>
                     </h2>
-                    <ul class="pricing-features">
-                        <li>Specijaliziram se za rad s računovodstvenim servisima jer razumijem kako njihovi klijenti donose odluke.</li>
-                        <li>Web stranica računovodstvenog servisa nije marketinški trik.</li>
-                        <li>Ona mora graditi povjerenje, prikazati stručnost i pomoći poduzetnicima da lakše donesu odluku o suradnji.</li>
-                    </ul>
+                    <div class="pricing-manifesto">
+                        <p class="pricing-manifesto-item">
+                            Specijaliziram se za rad s računovodstvenim servisima jer razumijem kako njihovi klijenti donose odluke.
+                        </p>
+                        <p class="pricing-manifesto-item">
+                            Web stranica računovodstvenog servisa nije marketinški trik. Ona mora graditi povjerenje, prikazati stručnost i pomoći poduzetnicima da lakše donesu odluku o suradnji.
+                        </p>
+                    </div>
                 </div>
                 <div class="pricing-card">
                     <div class="pricing-header">
@@ -1139,6 +1160,8 @@
                         <li>prijedloge poboljšanja</li>
                         <li>pregled mobilnog iskustva</li>
                         <li>kratki video s preporukama</li>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Consectetur adipiscing elit</li>
                     </ul>
                     <button type="button" class="btn-primary btn-large js-open-dialog" style="margin-top: var(--spacing-md); width: 100%;">Zatražite besplatnu analizu</button>
                 </div>
@@ -1204,7 +1227,12 @@
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Proces izrade prolazi kroz četiri faze:</p>
+                            <p><strong>Otkrivanje i planiranje</strong> — 1 do 2 dana. Razgovaramo o vašem servisu, ciljanoj publici i ciljevima stranice.</p>
+                            <p><strong>Dizajn</strong> — 3 do 5 dana. Izrađujem vizualni prijedlog koji odražava profesionalnost vašeg ureda.</p>
+                            <p><strong>Razvoj</strong> — 5 do 7 dana. Prijedlog se pretvara u funkcionalnu, responzivnu web stranicu.</p>
+                            <p><strong>Pregled i objava</strong> — 2 do 3 dana. Vaše povratne informacije, završne prilagodbe i postavljanje stranice na internet.</p>
+                            <p>Ukupno: <strong>11 do 17 radnih dana</strong>, odnosno otprilike 2 do 3 tjedna. Ovo je prosječno trajanje — složeniji projekti mogu potrajati nešto dulje.</p>
                         </div></div>
                     </div>
                     <div class="faq-item">
@@ -1213,7 +1241,10 @@
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Ovisi o kvaliteti postojećeg sadržaja.</p>
+                            <p><strong>Fotografije</strong> — najčešće su već dobre kvalitete pa ih koristimo ponovo ako odgovaraju novom dizajnu.</p>
+                            <p><strong>Tekstovi</strong> — ako postojeći tekst nije jasan ili nije prilagođen posjetitelju, ne brišemo ga nego prepričavamo istu ideju na razumljiviji i prijazni način.</p>
+                            <p>Sve promjene sadržaja prolaze kroz vas prije objave. Ništa ne ide na stranicu bez vašeg odobrenja — čak i ako predložim izmjene, vi imate zadnju riječ.</p>
                         </div></div>
                     </div>
                     <div class="faq-item">
@@ -1222,7 +1253,8 @@
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Cilj je da se na web stranici predstavite profesionalno i kvalitetno — a to uključuje i fotografije. One su često prvi vizualni dojam koji potencijalni klijent stekne o vašem uredu.</p>
+                            <p>Ako profesionalne fotografije ne postoje, pomoći ćemo vam u njihovoj izradi kako bi konačni rezultat bio na razini koju vaši klijenti očekuju.</p>
                         </div></div>
                     </div>
                     <div class="faq-item">
@@ -1231,7 +1263,9 @@
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Da.</p>
+                            <p><strong>Jednostavne izmjene</strong> — dodavanje ili mijenjanje teksta i fotografija uvijek su besplatne, bez vremenskog ograničenja.</p>
+                            <p><strong>Ostale izmjene</strong> — prvih 30 dana nakon objave podrška je besplatna. Nakon toga dogovaramo cijenu održavanja ovisno o vrsti i opsegu promjena koje su potrebne.</p>
                         </div></div>
                     </div>
                 </div>
@@ -1240,20 +1274,12 @@
                 <div class="faq-col">
                     <div class="faq-item">
                         <button class="faq-question">
-                            Mogu li kasnije dodati SEO?
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question">
                             Trebam li pisati sadržaj?
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Ne, to nije obvezno. Ipak, većina klijenata voli sudjelovati u pisanju sadržaja jer oni najbolje poznaju svoje usluge i klijente.</p>
+                            <p>U tom slučaju dobivate jasne smjernice i pomoć kako bi tekst bio prilagođen web stranici i razumljiv vašim posjetiteljima.</p>
                         </div></div>
                     </div>
                     <div class="faq-item">
@@ -1262,7 +1288,7 @@
                             <span class="faq-icon">+</span>
                         </button>
                         <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p>Cijena izrade web stranice je po dogovoru i ovisi o opsegu projekta. Za jednostavnije stranice cijena kreće od <strong>300 €</strong> pa naviše.</p>
                         </div></div>
                     </div>
                 </div>

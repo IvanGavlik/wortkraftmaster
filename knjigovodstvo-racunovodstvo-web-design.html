@@ -304,43 +304,36 @@
         .jt-step--featured.jt-active .jt-checklist li:nth-child(4) { transition-delay: 0.94s; }
 
         .jt-conclusion-band {
-            background: var(--color-gray-900);
-            padding: 3.5rem 0;
-            text-align: center;
+            background: #fff;
+            padding: var(--spacing-lg) calc(var(--container-padding) + 1.25rem) var(--spacing-md);
+            text-align: left;
             margin-top: var(--spacing-xl);
+            max-width: var(--container-max);
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 16px 16px 0 0;
+            border: 2px solid #cbd5e0;
+            border-bottom: 3px solid var(--color-primary);
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.07), 0 -1px 6px rgba(0,0,0,0.04);
         }
 
         .jt-conclusion-lead {
-            font-family: var(--font-primary);
-            font-weight: 600;
-            font-size: clamp(1.2rem, 2.5vw, 1.75rem);
-            color: #fff;
-            max-width: 720px;
-            margin: 0 auto;
-            line-height: 1.5;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem) !important;
+            margin: 0.75rem 0 0.875rem;
+            text-align: left;
         }
 
-        .jt-conclusion-lead em {
-            color: var(--color-primary);
-            font-style: normal;
-            font-weight: 700;
-        }
-
-        .jt-conclusion-rule {
-            width: 48px;
-            height: 3px;
-            background: var(--color-primary);
-            border-radius: 2px;
-            margin: 1.75rem auto;
+        .jt-conclusion-lead .title-line {
+            justify-content: flex-start;
         }
 
         .jt-conclusion-sub {
             font-family: var(--font-primary);
             font-weight: 400;
-            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-            color: rgba(255, 255, 255, 0.6);
-            max-width: 560px;
-            margin: 0 auto;
+            font-size: 1rem;
+            color: var(--color-gray-600);
+            max-width: 520px;
+            margin: 0;
             line-height: 1.7;
         }
 
@@ -381,6 +374,511 @@
             .jt-icon {
                 width: 34px;
                 height: 34px;
+            }
+        }
+
+        /* ---- Analysis Report Block ---- */
+        .analysis-block {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            height: 60vh;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            border: 2px solid #cbd5e0;
+            border-top: none;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
+            border-radius: 0 0 16px 16px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+            z-index: 2;
+            margin-bottom: -4rem;
+        }
+
+        /* Ledger header bar */
+        .analysis-header-bar {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 1.25rem;
+            background: var(--color-gray-900);
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        .ahb-label {
+            font-family: var(--font-primary);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.75);
+        }
+
+        .ahb-ref {
+            font-family: var(--font-primary);
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.04em;
+        }
+
+        .ahb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ahb-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 4px;
+            color: rgba(255,255,255,0.7);
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+            padding: 0;
+        }
+
+        .ahb-btn:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+        }
+
+        .ahb-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .ahb-counter {
+            font-family: var(--font-primary);
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.45);
+            min-width: 28px;
+            text-align: center;
+        }
+
+        /* Reset button defaults for nav items */
+        .anav-item {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* Left nav — spreadsheet sidebar */
+        .analysis-nav {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1rem 1.25rem 1.25rem;
+            border-right: 1px solid #e5e7eb;
+            background: #f8f9fa;
+            overflow-y: auto;
+        }
+
+        .analysis-nav-label {
+            font-family: var(--font-primary);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: none;
+            color: #6b7280;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: block;
+        }
+
+        .anav-list {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 0.125rem;
+        }
+
+        .anav-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.55rem 0.5rem 0.55rem 0.7rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .anav-item:hover {
+            background: rgba(0,0,0,0.04);
+        }
+
+        .anav-num {
+            font-family: var(--font-primary);
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: #9ca3af;
+            line-height: 1.6;
+            flex-shrink: 0;
+            transition: color 0.2s ease;
+        }
+
+        .anav-text {
+            font-family: var(--font-primary);
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: #6b7280;
+            line-height: 1.5;
+            transition: color 0.2s ease, font-weight 0.2s ease;
+        }
+
+        .anav-item.active {
+            background: rgba(255, 55, 0, 0.06);
+            padding-left: 0.5rem;
+            border-left: 3px solid var(--color-primary);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .anav-item.active .anav-num {
+            color: var(--color-primary);
+        }
+
+        .anav-item.active .anav-text {
+            color: #111827;
+            font-weight: 600;
+        }
+
+        .anav-progress {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            align-items: center;
+            justify-content: flex-end;
+            padding-top: 0.75rem;
+            margin-top: auto;
+        }
+
+        .anav-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 2px;
+            background: #e5e7eb;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .anav-dot.active {
+            background: var(--color-primary);
+            transform: scale(1.4);
+        }
+
+        /* Right content — clean ledger page */
+        .analysis-content {
+            min-width: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        /* Tab panel — only one section visible at a time */
+        .analysis-content section {
+            display: none;
+            height: 100%;
+        }
+
+        .analysis-content section.analysis-active {
+            display: block;
+        }
+
+        .analysis-content .container {
+            max-width: 100%;
+            padding: 0 2rem;
+            height: 100%;
+        }
+
+        /* Compact overrides for content inside the analysis panel */
+        .analysis-content .s4-section,
+        .analysis-content .s5-section,
+        .analysis-content .s6-section,
+        .analysis-content #problems {
+            padding: 1.5rem 0;
+        }
+
+        .analysis-content .s4-header,
+        .analysis-content .s5-header,
+        .analysis-content .s6-header {
+            margin-bottom: 1rem;
+            text-align: left;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .analysis-content .s4-title,
+        .analysis-content .s5-title,
+        .analysis-content .s6-title {
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
+            color: #111827 !important;
+            margin-bottom: 0.3rem;
+            text-align: left;
+            line-height: 1.3 !important;
+        }
+
+        .analysis-content .s4-subtitle,
+        .analysis-content .s5-subtitle,
+        .analysis-content .s6-subtitle {
+            font-size: 0.82rem;
+            text-align: left;
+        }
+
+        .analysis-content .s4-grid {
+            gap: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .analysis-content .s4-closing,
+        .analysis-content .s5-transition,
+        .analysis-content .s6-anchor {
+            font-family: var(--font-primary) !important;
+            font-size: 0.875rem !important;
+            font-style: italic !important;
+            font-weight: 400 !important;
+            color: #6b7280 !important;
+            text-align: left !important;
+            max-width: 100% !important;
+            margin: 0.75rem 0 0 !important;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 0.5rem;
+            line-height: 1.65 !important;
+        }
+
+        .analysis-content .s5-map {
+            margin: 0;
+        }
+
+        .analysis-content .s5-row {
+            padding: 0.65rem 0;
+        }
+
+        .analysis-content .s6-block {
+            padding: 0.65rem 0;
+        }
+
+        .analysis-content .s6-header {
+            margin-bottom: 0.75rem;
+        }
+
+        /* =============================================
+           SPREADSHEET / DATA TOOL CONTENT STYLES
+           ============================================= */
+
+        .analysis-content {
+            background: #fff;
+        }
+
+        /* Column header band — spreadsheet header row */
+        .spread-header {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0.35rem 0.5rem;
+        }
+
+        .s6-spread-header {
+            grid-template-columns: 1fr 40px 1fr;
+        }
+
+        .sh-col {
+            font-family: var(--font-primary);
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+
+        .sh-center {
+            text-align: center;
+        }
+
+        /* Section title — clean, no chrome */
+        .analysis-content .s4-title,
+        .analysis-content .s5-title,
+        .analysis-content .s6-title {
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+            color: #111827;
+            padding-bottom: 0;
+            border-bottom: none;
+            margin-bottom: 0.2rem;
+        }
+
+        .analysis-content .s4-subtitle,
+        .analysis-content .s5-subtitle,
+        .analysis-content .s6-subtitle {
+            font-size: 0.76rem;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+            font-style: normal;
+        }
+
+        .analysis-content .s4-header .section-label,
+        .analysis-content .s5-header .section-label,
+        .analysis-content .s6-header .section-label {
+            font-family: var(--font-primary);
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            color: #9ca3af;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        /* ---- Section 4: rows ---- */
+        .analysis-content .s4-grid {
+            display: block;
+            border-top: none;
+            gap: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .analysis-content .s4-card {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #f3f4f6;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0.65rem 0.5rem;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            column-gap: 0;
+            row-gap: 0.1rem;
+            align-items: start;
+        }
+
+        .analysis-content .s4-card:hover {
+            background: #fafafa;
+        }
+
+        .analysis-content .s4-card-icon {
+            display: none;
+        }
+
+        .analysis-content .s4-card-title {
+            font-family: var(--font-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0;
+            grid-column: 1;
+            padding-right: 1rem;
+            line-height: 1.5;
+        }
+
+        .analysis-content .s4-card-body {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.6;
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+
+        /* ---- Section 5 ---- */
+        .analysis-content .s5-map {
+            border-top: none;
+        }
+
+        .analysis-content .s5-row {
+            grid-template-columns: 180px 1fr;
+            gap: 0;
+            padding: 0.55rem 0.5rem;
+            border-bottom: 1px solid #f3f4f6;
+            align-items: baseline;
+        }
+
+        .analysis-content .s5-row:hover {
+            background: #fafafa;
+        }
+
+        .analysis-content .s5-label {
+            font-family: var(--font-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            text-transform: none;
+            letter-spacing: normal;
+            padding-top: 0;
+        }
+
+        .analysis-content .s5-content {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+
+        /* ---- Section 6 ---- */
+        .analysis-content .s6-blocks {
+            border-top: none;
+        }
+
+        .analysis-content .s6-block {
+            padding: 0.55rem 0.5rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .analysis-content .s6-block:hover {
+            background: #fafafa;
+        }
+
+        .analysis-content .s6-block-label {
+            font-family: var(--font-primary);
+            font-size: 0.56rem;
+            letter-spacing: 0.1em;
+            color: #9ca3af;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        .analysis-content .s6-row {
+            grid-template-columns: 1fr 40px 1fr;
+        }
+
+        .analysis-content .s6-before {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        .analysis-content .s6-after {
+            font-size: 0.875rem;
+            color: #111827;
+            font-weight: 500;
+        }
+
+        .analysis-content .s6-arrow {
+            color: #d1d5db;
+        }
+
+
+        @media (max-width: 1024px) {
+            .analysis-block {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .analysis-nav {
+                display: none;
+            }
+            .analysis-header-bar {
+                grid-column: 1;
             }
         }
 
@@ -664,7 +1162,7 @@
 
         /* ---- Problem Section ---- */
         .problem-section {
-            padding: var(--spacing-xl) 0;
+            padding: var(--spacing-xl) 0 0;
         }
 
         .problem-intro {
@@ -802,7 +1300,7 @@
             background: var(--color-gray-900);
             color: var(--color-white);
             border-radius: 50px;
-            font-family: var(--font-mono);
+            font-family: var(--font-primary);
             font-size: 0.8rem;
             letter-spacing: 0.01em;
         }
@@ -961,7 +1459,7 @@
 
         /* ---- How I Help Section ---- */
         .how-i-help {
-            padding: var(--spacing-xl) 0;
+            padding: calc(var(--spacing-xl) + 4rem) 0 var(--spacing-xl);
             background: var(--color-gray-100);
         }
 
@@ -1427,15 +1925,46 @@
 
         </div>
 
-        <!-- Full-width conclusion band -->
+        <!-- Conclusion / analysis section title -->
         <div class="jt-conclusion-band">
-            <div class="container">
-                <p class="jt-conclusion-lead">Web stranica često <em>potvrđuje ili narušava</em> prvi dojam koji potencijalni klijent stvara o vašem servisu.</p>
-                <div class="jt-conclusion-rule"></div>
-                <p class="jt-conclusion-sub">Web stranica zato nije samo informativni kanal — ona je dio procesa donošenja odluke.</p>
-            </div>
+            <span class="section-label">Analiza web prisutnosti</span>
+            <h2 class="jt-conclusion-lead hero-title-creative">
+                <span class="title-line"><span class="text-black">Web stranica često</span></span>
+                <span class="title-line"><span class="text-gray">potvrđuje ili narušava prvi dojam.</span></span>
+            </h2>
+            <p class="jt-conclusion-sub">Web stranica nije samo informativni kanal — ona je dio procesa donošenja odluke.</p>
         </div>
     </section>
+
+    <!-- Analysis Report Block (Sections 4–7) -->
+    <div class="analysis-block">
+
+        <!-- Sticky left nav -->
+        <aside class="analysis-nav">
+            <span class="analysis-nav-label">Analiza</span>
+            <nav class="anav-list">
+                <button class="anav-item" data-section="kvaliteta">
+                    <span class="anav-num">1</span>
+                    <span class="anav-text">Predstavlja li web stranica kvalitetu?</span>
+                </button>
+                <button class="anav-item" data-section="povjerenje">
+                    <span class="anav-num">2</span>
+                    <span class="anav-text">Zašto ne ulijeva povjerenje?</span>
+                </button>
+                <button class="anav-item" data-section="transformacija">
+                    <span class="anav-num">3</span>
+                    <span class="anav-text">Kako izgleda bolja verzija?</span>
+                </button>
+            </nav>
+            <div class="anav-progress">
+                <div class="anav-dot" data-section="kvaliteta"></div>
+                <div class="anav-dot" data-section="povjerenje"></div>
+                <div class="anav-dot" data-section="transformacija"></div>
+            </div>
+        </aside>
+
+        <!-- Scrollable right content -->
+        <div class="analysis-content">
 
     <!-- Section 4: Self-diagnosis -->
     <section id="kvaliteta" class="s4-section">
@@ -1446,6 +1975,10 @@
                 <p class="s4-subtitle">U većini slučajeva — web stranica ne prati stvarnu razinu usluge.</p>
             </div>
 
+            <div class="spread-header">
+                <span class="sh-col">Situacija</span>
+                <span class="sh-col">Kontekst</span>
+            </div>
             <div class="s4-grid">
 
                 <!-- Card 1 -->
@@ -1503,6 +2036,10 @@
                 <p class="s5-subtitle">Kod računovodstvenih servisa povjerenje se ne gubi u detaljima — nego u načinu na koji je sve predstavljeno online.</p>
             </div>
 
+            <div class="spread-header">
+                <span class="sh-col">Područje</span>
+                <span class="sh-col">Nalaz</span>
+            </div>
             <div class="s5-map">
 
                 <div class="s5-row">
@@ -1542,11 +2079,15 @@
         <div class="container">
 
             <div class="s6-header">
-                <span class="section-label">Transformacija percepcije</span>
                 <h2 class="s6-title">Kako izgleda web stranica koja gradi povjerenje?</h2>
                 <p class="s6-subtitle">Nije stvar u dizajnu — nego u tome što posjetitelj osjeti u prvih nekoliko sekundi.</p>
             </div>
 
+            <div class="spread-header s6-spread-header">
+                <span class="sh-col">Trenutno</span>
+                <span class="sh-col sh-center">→</span>
+                <span class="sh-col">Cilj</span>
+            </div>
             <div class="s6-blocks">
 
                 <div class="s6-block">
@@ -1671,6 +2212,9 @@
             </div>
         </div>
     </section>
+
+        </div><!-- /analysis-content -->
+    </div><!-- /analysis-block -->
 
     <!-- How I Help Section -->
     <section id="how-i-help" class="how-i-help">
@@ -2281,6 +2825,44 @@
                 }
             }, { threshold: 0.25 });
             obs.observe(tl);
+        })();
+
+        // Analysis block — tab panel switching
+        (function () {
+            const navItems   = document.querySelectorAll('.anav-item');
+            const dots       = document.querySelectorAll('.anav-dot');
+            const prevBtn    = document.getElementById('anavPrev');
+            const nextBtn    = document.getElementById('anavNext');
+            const counter    = document.getElementById('anavCounter');
+            const sectionIds = ['kvaliteta', 'povjerenje', 'transformacija'];
+            if (!navItems.length) return;
+
+            let current = 0;
+
+            function showIndex(idx) {
+                current = idx;
+                const id = sectionIds[idx];
+
+                sectionIds.forEach((sid, i) => {
+                    const el = document.getElementById(sid);
+                    if (el) el.classList.toggle('analysis-active', i === idx);
+                });
+                navItems.forEach(item => item.classList.toggle('active', item.dataset.section === id));
+                dots.forEach(dot => dot.classList.toggle('active', dot.dataset.section === id));
+
+                if (counter) counter.textContent = (idx + 1) + ' / ' + sectionIds.length;
+                if (prevBtn) prevBtn.disabled = idx === 0;
+                if (nextBtn) nextBtn.disabled = idx === sectionIds.length - 1;
+            }
+
+            navItems.forEach((item, i) => {
+                item.addEventListener('click', () => showIndex(i));
+            });
+
+            if (prevBtn) prevBtn.addEventListener('click', () => { if (current > 0) showIndex(current - 1); });
+            if (nextBtn) nextBtn.addEventListener('click', () => { if (current < sectionIds.length - 1) showIndex(current + 1); });
+
+            showIndex(0);
         })();
 
         staggerObserve('.journey-step', 220);

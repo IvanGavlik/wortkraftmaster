@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Računovodstveni servis Marić - Usluge računovodstva i knjigovodstva Rijeka</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; font-size: 13px; background: #fff; color: #333; }
+
+  /* Top info bar */
+  .top-bar {
+    background: #1a3a6b;
+    color: #fff;
+    font-size: 11px;
+    padding: 5px 0;
+    border-bottom: 2px solid #cc9900;
+  }
+  .top-bar-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-bar a { color: #ffda6a; text-decoration: none; }
+
+  /* Header */
+  .site-header {
+    background: #fff;
+    border-bottom: 3px solid #1a3a6b;
+    padding: 12px 0;
+  }
+  .header-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo-box {
+    border: 2px solid #1a3a6b;
+    padding: 8px 14px;
+    text-align: center;
+  }
+  .logo-box .logo-name {
+    font-size: 17px;
+    font-weight: bold;
+    color: #1a3a6b;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+  .logo-box .logo-sub {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+  .header-contact {
+    text-align: right;
+    font-size: 12px;
+    color: #444;
+    line-height: 1.8;
+  }
+  .header-contact strong {
+    font-size: 18px;
+    color: #1a3a6b;
+    display: block;
+  }
+
+  /* Nav */
+  nav {
+    background: #1a3a6b;
+    border-bottom: 3px solid #cc9900;
+  }
+  nav ul {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 10px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  nav ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    border-right: 1px solid #2d5399;
+    transition: background 0.2s;
+  }
+  nav ul li a:hover,
+  nav ul li.active a {
+    background: #cc9900;
+    color: #fff;
+  }
+
+  /* Banner */
+  .banner {
+    background: linear-gradient(135deg, #dce9f8 0%, #b8d1ef 50%, #dce9f8 100%);
+    border-bottom: 2px solid #c0cfe0;
+    padding: 22px 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255,255,255,0.15) 10px,
+      rgba(255,255,255,0.15) 20px
+    );
+  }
+  .banner-content { position: relative; z-index: 1; }
+  .banner h1 {
+    font-size: 22px;
+    color: #1a3a6b;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+  }
+  .banner p {
+    font-size: 13px;
+    color: #3a5a8a;
+    margin-bottom: 12px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .banner-btn {
+    background: #cc9900;
+    color: #fff;
+    border: 1px solid #aa7700;
+    padding: 7px 18px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .banner-btn:hover { background: #aa7700; }
+
+  /* Main layout */
+  .main-wrap {
+    max-width: 980px;
+    margin: 18px auto;
+    padding: 0 10px;
+    display: flex;
+    gap: 16px;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    flex-shrink: 0;
+  }
+  .sidebar-box {
+    border: 1px solid #c0cfe0;
+    margin-bottom: 14px;
+  }
+  .sidebar-box-title {
+    background: #1a3a6b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .sidebar-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .sidebar-box ul li {
+    border-bottom: 1px solid #e8eef5;
+  }
+  .sidebar-box ul li a {
+    display: block;
+    padding: 7px 10px;
+    font-size: 12px;
+    color: #1a3a6b;
+    text-decoration: none;
+    background: #f5f8fc;
+  }
+  .sidebar-box ul li a:hover { background: #dce9f8; text-decoration: underline; }
+  .sidebar-box ul li a::before { content: '» '; color: #cc9900; }
+
+  .sidebar-contact-box {
+    border: 1px solid #c0cfe0;
+    padding: 10px;
+    background: #f5f8fc;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #444;
+  }
+  .sidebar-contact-box strong { color: #1a3a6b; display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+
+  /* Content */
+  .content { flex: 1; min-width: 0; }
+
+  .welcome-title {
+    color: #1a3a6b;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid #cc9900;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+  .welcome-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .services-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .service-box {
+    flex: 1;
+    border: 1px solid #c0cfe0;
+    background: #f5f8fc;
+  }
+  .service-box-head {
+    background: #2d5399;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    letter-spacing: 0.5px;
+  }
+  .service-box-body {
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #444;
+    line-height: 1.8;
+  }
+  .service-box-body ul { padding-left: 16px; }
+  .service-box-body ul li { margin-bottom: 2px; }
+
+  .news-title {
+    color: #1a3a6b;
+    font-size: 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #cc9900;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    margin-top: 16px;
+  }
+  .news-item {
+    border-bottom: 1px dotted #c0cfe0;
+    padding: 8px 0;
+    font-size: 12px;
+    color: #444;
+    line-height: 1.6;
+  }
+  .news-item .news-date { color: #888; font-size: 11px; margin-bottom: 2px; }
+  .news-item a { color: #1a3a6b; }
+
+  /* Counter strip */
+  .counter-strip {
+    background: #f0f5fb;
+    border-top: 1px solid #c0cfe0;
+    border-bottom: 1px solid #c0cfe0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 14px 0;
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+  }
+  .counter-strip div strong { display: block; font-size: 20px; color: #1a3a6b; }
+
+  /* Footer */
+  footer {
+    background: #1a3a6b;
+    border-top: 3px solid #cc9900;
+    color: #cdd9ed;
+    font-size: 11px;
+    margin-top: 20px;
+  }
+  .footer-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 16px 10px;
+    display: flex;
+    gap: 20px;
+  }
+  .footer-col { flex: 1; }
+  .footer-col h4 {
+    color: #ffda6a;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #2d5399;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+  }
+  .footer-col p, .footer-col a { color: #cdd9ed; text-decoration: none; display: block; margin-bottom: 3px; line-height: 1.7; }
+  .footer-col a:hover { color: #fff; text-decoration: underline; }
+  .footer-bottom {
+    background: #112958;
+    padding: 7px 10px;
+    text-align: center;
+    font-size: 10px;
+    color: #8899bb;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <span>Radimo svaki radni dan 8:00 – 16:00 | <a href="#">info@maric-racunovodstvo.hr</a></span>
+    <span>Pratite nas: <a href="#">Facebook</a> | <a href="#">LinkedIn</a></span>
+  </div>
+</div>
+
+<div class="site-header">
+  <div class="header-inner">
+    <div class="logo-box">
+      <div class="logo-name">MARIĆ</div>
+      <div class="logo-sub">računovodstveni servis</div>
+    </div>
+    <div class="header-contact">
+      Trebate pomoć? Nazovite nas!
+      <strong>051 123 456</strong>
+      Pon – Pet: 08:00 – 16:00
+    </div>
+  </div>
+</div>
+
+<nav>
+  <ul>
+    <li class="active"><a href="#">Početna</a></li>
+    <li><a href="#">O nama</a></li>
+    <li><a href="#">Usluge</a></li>
+    <li><a href="#">Cjenik</a></li>
+    <li><a href="#">Zakoni i propisi</a></li>
+    <li><a href="#">Novosti</a></li>
+    <li><a href="#">Galerija</a></li>
+    <li><a href="#">Kontakt</a></li>
+  </ul>
+</nav>
+
+<div class="banner">
+  <div class="banner-content">
+    <h1>Računovodstveni servis Marić d.o.o. Rijeka</h1>
+    <p>Pružamo kompletne usluge računovodstva, bookkeepinga, poreznog savjetovanja i izrade financijskih izvještaja za obrtnici i tvrtke na području Rijeke i Primorsko-goranske županije.</p>
+    <a href="#" class="banner-btn">Pošalji upit</a>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+  <aside class="sidebar">
+    <div class="sidebar-box">
+      <div class="sidebar-box-title">Naše usluge</div>
+      <ul>
+        <li><a href="#">Računovodstvo</a></li>
+        <li><a href="#">Knjigovodstvo</a></li>
+        <li><a href="#">Porezno savjetovanje</a></li>
+        <li><a href="#">Osnivanje tvrtke</a></li>
+        <li><a href="#">Platni promet</a></li>
+        <li><a href="#">Izrada izvještaja</a></li>
+        <li><a href="#">PDV obrasci</a></li>
+        <li><a href="#">Godišnji obračun</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-contact-box">
+      <strong>Kontakt</strong>
+      Marić d.o.o.<br>
+      Korzo 14, Rijeka<br>
+      OIB: 12345678901<br>
+      Tel: 051 123 456<br>
+      Fax: 051 123 457<br>
+      info@maric-racunovodstvo.hr
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="welcome-title">Dobrodošli na stranicu Računovodstvenog servisa Marić!</div>
+    <p class="welcome-text">
+      Računovodstveni servis Marić d.o.o. osnovan je 2003. godine i od tada pruža visokokvalitetne usluge računovodstva i knjigovodstva poduzećima i obrtnicima na području Rijeke i šire okolice. Naš tim iskusnih stručnjaka osigurava da su vaše financije uvijek u redu i u skladu s važećim zakonima i propisima Republike Hrvatske. Koristimo najnoviji računovodstveni softver i redovito pratimo promjene u zakonodavstvu kako bismo vam pružili najažurnije i najpouzdanije usluge.
+    </p>
+
+    <div class="services-row">
+      <div class="service-box">
+        <div class="service-box-head">Računovodstvo</div>
+        <div class="service-box-body">
+          <ul>
+            <li>Vođenje poslovnih knjiga</li>
+            <li>Evidencija prihoda i rashoda</li>
+            <li>Izrada financijskih izvještaja</li>
+            <li>Godišnji obračun</li>
+            <li>Statistički izvještaji</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-box">
+        <div class="service-box-head">Porezne usluge</div>
+        <div class="service-box-body">
+          <ul>
+            <li>PDV prijave</li>
+            <li>Porezno savjetovanje</li>
+            <li>Zastupanje pred Poreznom</li>
+            <li>Porez na dohodak</li>
+            <li>Porez na dobit</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-box">
+        <div class="service-box-head">Ostale usluge</div>
+        <div class="service-box-body">
+          <ul>
+            <li>Osnivanje obrta i d.o.o.</li>
+            <li>Obračun plaća</li>
+            <li>Prijave radnika</li>
+            <li>Platni promet</li>
+            <li>Archiviranje dokum.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="counter-strip">
+      <div><strong>20+</strong> godina iskustva</div>
+      <div><strong>150+</strong> zadovoljnih klijenata</div>
+      <div><strong>100%</strong> zakonska usklađenost</div>
+    </div>
+
+    <div class="news-title">Novosti i obavijesti</div>
+    <div class="news-item">
+      <div class="news-date">15.03.2024.</div>
+      <a href="#">Promjene u PDV zakonu za 2024. godinu - što trebate znati</a><br>
+      Zakon o porezu na dodanu vrijednost doživio je nekoliko važnih izmjena koje stupaju na snagu od 1. siječnja 2024...
+    </div>
+    <div class="news-item">
+      <div class="news-date">02.02.2024.</div>
+      <a href="#">Rok za predaju godišnjeg financijskog izvještaja</a><br>
+      Podsjećamo sve naše klijente da je rok za predaju godišnjeg financijskog izvještaja za 2023. godinu...
+    </div>
+    <div class="news-item">
+      <div class="news-date">10.01.2024.</div>
+      <a href="#">Nova minimalna plaća od 2024. - sve što trebate znati</a><br>
+      Od 1. siječnja 2024. minimalna plaća iznosi 840 EUR bruto. Saznajte kako to utječe na obračun plaća...
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Računovodstveni servis Marić</h4>
+      <p>Pružamo računovodstvene usluge od 2003. godine. Registrirani smo u Sudskom registru Trgovačkog suda u Rijeci.</p>
+      <p>OIB: 12345678901<br>IBAN: HR12 2340 0091 1234 5678 9</p>
+    </div>
+    <div class="footer-col">
+      <h4>Brze veze</h4>
+      <a href="#">Početna stranica</a>
+      <a href="#">Naše usluge</a>
+      <a href="#">O nama i timu</a>
+      <a href="#">Cjenik usluga</a>
+      <a href="#">Novosti</a>
+      <a href="#">Kontakt forma</a>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt informacije</h4>
+      <p>Korzo 14, 51000 Rijeka</p>
+      <p>Tel: 051 123 456</p>
+      <p>Fax: 051 123 457</p>
+      <p>Mob: 091 234 5678</p>
+      <a href="#">info@maric-racunovodstvo.hr</a>
+      <p>Radno vrijeme: Pon–Pet 8–16h</p>
+    </div>
+    <div class="footer-col">
+      <h4>Certifikati</h4>
+      <p>Član smo Hrvatske zajednice računovođa i financijskih djelatnika.</p>
+      <p>Licenciramo za porezno savjetovanje od Porezne uprave RH.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2024 Računovodstveni servis Marić d.o.o. | Sva prava pridržana | <a href="#" style="color:#8899bb;">Izjava o privatnosti</a> | <a href="#" style="color:#8899bb;">Uvjeti korištenja</a> | Web dizajn: <a href="#" style="color:#8899bb;">InternetShop.hr</a>
+  </div>
+</footer>
+
+</body>
+</html>

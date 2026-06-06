@@ -2302,6 +2302,127 @@
             margin: 0;
         }
 
+        /* Structured phase blocks inside step body */
+        .pt-phase {
+            margin-bottom: 0.875rem;
+        }
+        .pt-phase-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 0.3rem;
+        }
+        .pt-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .pt-list li {
+            font-size: 0.88rem;
+            color: var(--color-gray-700);
+            line-height: 1.55;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .pt-list li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--color-gray-400);
+        }
+        .pt-meta-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            padding-top: 0.875rem;
+            border-top: 1px solid var(--color-gray-100);
+        }
+        .pt-meta-item {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--color-gray-600);
+        }
+        .pt-closing {
+            margin-top: 1rem;
+            padding-top: 0.875rem;
+            border-top: 1px solid var(--color-gray-100);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-gray-900);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .pt-live-headline {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin: 0;
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .pt-final-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+            width: 100%;
+            text-align: left;
+        }
+
+        .pt-final-col-title {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: var(--color-gray-400);
+            margin-bottom: 0.5rem;
+        }
+
+        .pt-final-col-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .pt-final-col-list li {
+            font-size: 0.88rem;
+            color: var(--color-gray-700);
+            font-weight: 400;
+            line-height: 1.55;
+            display: flex;
+            align-items: baseline;
+            gap: 0.375rem;
+        }
+
+        .pt-final-col-list li::before {
+            content: '✓';
+            color: #16a34a;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .pt-step--final .pt-closing {
+            margin: 0;
+            border-top: 1px solid var(--color-gray-100);
+            padding-top: 0.625rem;
+            padding-bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
         .pt-outcome {
             display: flex;
             align-items: center;
@@ -2339,40 +2460,35 @@
         .pt-step--final {
             width: 65%;
             margin: 0 auto;
-            border: 2px solid var(--color-primary);
-            background: #fff9f8;
-            padding: 2.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 1.5rem;
-            overflow: visible;
+            border: 2px solid #16a34a;
+            background: #fff;
             cursor: default;
         }
 
         .pt-final-arrow-ring {
-            width: 72px;
-            height: 72px;
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
             border-radius: 50%;
-            border: 2px solid var(--color-primary);
+            border: 1.5px solid var(--color-gray-300);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color-primary);
-            animation: ptRingPulse 2.8s ease-in-out infinite;
+            color: var(--color-gray-700);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .pt-step.is-active .pt-final-arrow-ring {
+            background: #16a34a;
+            border-color: #16a34a;
+            color: #fff;
         }
 
         @keyframes ptRingPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255,55,0,0.2); }
-            50%       { box-shadow: 0 0 0 12px rgba(255,55,0,0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.25); }
+            50%       { box-shadow: 0 0 0 14px rgba(22,163,74,0); }
         }
 
-        .pt-step--final .pt-step-title {
-            font-size: 1.5rem;
-            color: var(--color-primary);
-            margin: 0;
-        }
 
         .pt-launch-placeholder {
             width: 100%;
@@ -2597,13 +2713,63 @@
                 margin-right: auto;
             }
             .pt-step-title { font-size: 1rem; }
-            .pt-step--final .pt-step-title { font-size: 1.25rem; }
         }
 
         @media (max-width: 600px) {
             .pt-step[data-step="1"],
             .pt-step[data-step="2"],
             .pt-step--final { width: 100%; }
+        }
+
+        /* Ensure hidden attribute wins over any display CSS */
+        [hidden] { display: none !important; }
+
+        /* Dialog — step flow */
+        .d-question {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin: 0;
+        }
+        .d-info-intro {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--color-gray-700);
+            margin: 0 0 0.75rem;
+        }
+        .d-info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .d-info-list li {
+            font-size: 0.88rem;
+            color: var(--color-gray-700);
+            line-height: 1.5;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .d-info-list li::before {
+            content: '✓';
+            color: #16a34a;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .d-download-link {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+        .d-download-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--color-gray-400);
+            margin-top: 0.625rem;
         }
     </style>
 </head>
@@ -2650,7 +2816,7 @@
                     <p class="hero-subtitle">Pomažem računovodstvenim i knjigovodstvenim uredima izgraditi profesionalan online nastup koji povećava <span class="underline-text">povjerenje</span>, jasno komunicira <span class="underline-text">stručnost</span> i jača njihov profesionalni <span class="underline-text">ugled</span> kod poduzetnika i firmi.</p>
 
                     <div class="hero-cta">
-                        <button type="button" class="btn-primary btn-large js-open-dialog">Saznajte kako vašu tvrtku vide potencijalni klijenti</button>
+                        <button type="button" class="btn-primary btn-large js-open-dialog" data-dialog="hero">Saznajte kako vašu tvrtku vide potencijalni klijenti</button>
                     </div>
                 </div>
 
@@ -2923,7 +3089,7 @@
             <!-- CTA -->
             <div class="ap-cta-block">
                 <p>Ovo su samo 4 od više od 35 pitanja koja zajedno daju jasnu sliku o tome koliko vaša web stranica gradi povjerenje kod potencijalnih klijenata.</p>
-                <button type="button" class="btn-primary btn-large js-open-dialog">Brza procjena</button>
+                <button type="button" class="btn-primary btn-large js-open-dialog" data-dialog="assessment">Brza procjena</button>
             </div>
         </div>
     </section>
@@ -3129,17 +3295,46 @@
                 <!-- Step 1 — left side -->
                 <div class="pt-step" data-step="1">
                     <div class="pt-step-header">
-                        <div class="pt-num">1</div>
+                        <div class="pt-num">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+                                <path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                            </svg>
+                        </div>
                         <h3 class="pt-step-title">Besplatna analiza</h3>
                         <button class="pt-toggle" aria-expanded="false">+</button>
                     </div>
                     <div class="pt-body">
                         <div class="pt-body-inner">
-                            <p>Kratki razgovor ili email — analiziramo vašu postojeću web stranicu i dajemo konkretan uvid što funkcionira, a što ne. Bez obveza i bez pritiska.</p>
+                            <div class="pt-phase">
+                                <span class="pt-phase-label">Istraživanje</span>
+                                <ul class="pt-list">
+                                    <li>Vaša trenutna web stranica i prisutnost na društvenim mrežama</li>
+                                    <li>Vidljivost na Googleu i online reputacija općenito</li>
+                                </ul>
+                            </div>
+                            <div class="pt-phase">
+                                <span class="pt-phase-label">Razumijevanje</span>
+                                <ul class="pt-list">
+                                    <li>Vaše preferencije — brand, stil, boje, poruka koju želite prenijeti</li>
+                                    <li>Vaši klijenti — tko su, kako rade, što traže, kako donose odluke</li>
+                                </ul>
+                            </div>
+                            <div class="pt-phase">
+                                <span class="pt-phase-label">Rezultat</span>
+                                <ul class="pt-list">
+                                    <li>Plan i demo web stranica izrađena prema prikupljenim parametrima</li>
+                                </ul>
+                            </div>
+                            <div class="pt-meta-row">
+                                <span class="pt-meta-item">⏱ 24h</span>
+                                <span class="pt-meta-item">✓ Besplatno</span>
+                                <span class="pt-meta-item">✓ Bez obveze</span>
+                            </div>
                         </div>
                     </div>
                     <div class="pt-outcome">
-<span class="pt-outcome-value">Neobavezni demo</span>
+<span class="pt-outcome-value">Demo web stranica</span>
                     </div>
                 </div>
 
@@ -3155,13 +3350,40 @@
                 <!-- Step 2 — right side -->
                 <div class="pt-step" data-step="2">
                     <div class="pt-step-header">
-                        <div class="pt-num">2</div>
+                        <div class="pt-num">
+                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                <rect x="1.5" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+                                <path d="M1.5 6.5h14" stroke="currentColor" stroke-width="1.3"/>
+                                <circle cx="3.75" cy="4.75" r="0.7" fill="currentColor"/>
+                                <circle cx="6" cy="4.75" r="0.7" fill="currentColor"/>
+                            </svg>
+                        </div>
                         <h3 class="pt-step-title">Izrada web stranice</h3>
                         <button class="pt-toggle" aria-expanded="false">+</button>
                     </div>
                     <div class="pt-body">
                         <div class="pt-body-inner">
-                            <p>Dizajniramo i razvijamo vašu web stranicu prema dogovorenom planu. Redovito vas informiramo o napretku i uključujemo vaše povratne informacije u svakom koraku.</p>
+                            <div class="pt-phase">
+                                <span class="pt-phase-label">Proces</span>
+                                <ul class="pt-list">
+                                    <li>Na temelju dogovorenog plana radimo u fazama — svaku vam pokazujemo prije nego idemo dalje</li>
+                                    <li>Koristimo provjereni sustav primijenjen na desetke projekata</li>
+                                </ul>
+                            </div>
+                            <div class="pt-phase">
+                                <span class="pt-phase-label">Vaša uloga</span>
+                                <ul class="pt-list">
+                                    <li>Ne morate znati ništa o web dizajnu — mi vodimo cijeli proces od teksta i slika do postavljanja</li>
+                                    <li>Prilagođavamo se vašem tempu i ugrađujemo vaš feedback u svakom koraku</li>
+                                </ul>
+                            </div>
+                            <div class="pt-phase">
+                                <span class="pt-phase-label">Isporuka</span>
+                                <ul class="pt-list">
+                                    <li>Dizajn, razvoj i postavljanje — sve u jednom paketu, u dogovorenom roku</li>
+                                </ul>
+                            </div>
+                            <p class="pt-closing">Nastaje web stranica koja jasno komunicira tko ste, što nudite i zašto vam se može vjerovati.</p>
                         </div>
                     </div>
                     <div class="pt-outcome">
@@ -3180,21 +3402,54 @@
 
                 <!-- Step 3 — Final (centered) -->
                 <div class="pt-step pt-step--final" data-step="3">
-                    <div class="pt-final-arrow-ring">
-                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                            <path d="M6 14H22M22 14L14 6M22 14L14 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="pt-step-title">Idete online</h3>
-                    <div class="pt-launch-placeholder">
-                        <div class="pt-launch-dots">
-                            <span class="pt-launch-dot"></span>
-                            <span class="pt-launch-dot"></span>
-                            <span class="pt-launch-dot"></span>
-                            <span class="pt-launch-dot"></span>
-                            <span class="pt-launch-dot"></span>
+                    <div class="pt-step-header">
+                        <div class="pt-final-arrow-ring">
+                            <svg width="20" height="20" viewBox="0 0 26 26" fill="none">
+                                <circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.75"/>
+                                <path d="M13 4c0 0-4 4.5-4 9s4 9 4 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M13 4c0 0 4 4.5 4 9s-4 9-4 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M4 13h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M5.5 8.5h15M5.5 17.5h15" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                            </svg>
                         </div>
-                        <span class="pt-launch-label">animacija dolazi uskoro</span>
+                        <h3 class="pt-step-title">Profesionalan online nastup</h3>
+                        <button class="pt-toggle" aria-expanded="false">+</button>
+                    </div>
+                    <div class="pt-body">
+                        <div class="pt-body-inner">
+                            <div class="pt-final-cols">
+                                <div class="pt-final-col">
+                                    <span class="pt-final-col-title">Za klijente</span>
+                                    <ul class="pt-final-col-list">
+                                        <li>Povjerenje</li>
+                                        <li>Iskustvo</li>
+                                        <li>Stručnost</li>
+                                        <li>Profesionalni ugled</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-final-col">
+                                    <span class="pt-final-col-title">Na webu</span>
+                                    <ul class="pt-final-col-list">
+                                        <li>Moderan izgled</li>
+                                        <li>Jasna poruka</li>
+                                        <li>Jednostavan kontakt</li>
+                                        <li>Prikaz referenci</li>
+                                    </ul>
+                                </div>
+                                <div class="pt-final-col">
+                                    <span class="pt-final-col-title">Tehničko</span>
+                                    <ul class="pt-final-col-list">
+                                        <li>Domena</li>
+                                        <li>Hosting</li>
+                                        <li>SSL certifikat</li>
+                                        <li>Poslovni email</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-outcome">
+                        <span class="pt-outcome-value">Podrška uključena i nakon izrade</span>
                     </div>
                 </div>
 
@@ -3468,51 +3723,61 @@
                     <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
             </button>
-            <h3 class="dialog-title" id="dialogTitle">Reci što trebaš</h3>
-            <p class="dialog-subtitle">Odgovorit ću u roku od 24 sata.</p>
-            <form class="dialog-form" id="dialogForm">
+            <h3 class="dialog-title" id="dialogTitle">Besplatna analiza</h3>
+            <p class="dialog-subtitle" id="dialogSubtitle">Saznajte kako potencijalni klijenti vide vaš ured.</p>
+
+            <!-- Step 1: has web? -->
+            <div id="dStep1">
+                <p class="d-question">Imate li web stranicu?</p>
+                <div class="fa-choices" style="margin-top:0.75rem;">
+                    <button type="button" class="fa-choice-btn" data-choice="has-web">Da, imam web stranicu</button>
+                    <button type="button" class="fa-choice-btn" data-choice="no-web">Nemam web stranicu</button>
+                </div>
+            </div>
+
+            <!-- Step 2a: has web — form -->
+            <form id="dFormHasWeb" class="dialog-form" hidden>
                 <div class="dialog-field">
-                    <label class="dialog-label" for="d-type">Što ti treba?</label>
-                    <div class="dialog-select-wrap">
-                        <select id="d-type" name="type" class="dialog-select" required>
-                            <option value="" disabled selected>Odaberi...</option>
-                            <option value="Landing page">Landing page</option>
-                            <option value="Web stranica">Web stranica</option>
-                            <option value="Web shop">Web shop</option>
-                        </select>
-                        <svg class="dialog-select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <label class="dialog-label" for="dUrl">URL vaše web stranice</label>
+                    <input type="text" id="dUrl" name="url" class="dialog-input" placeholder="vasured.hr" required>
                 </div>
                 <div class="dialog-field">
-                    <label class="dialog-label" for="d-existing">Imaš li već web?</label>
-                    <div class="dialog-select-wrap">
-                        <select id="d-existing" name="existing" class="dialog-select" required>
-                            <option value="" disabled selected>Odaberi...</option>
-                            <option value="Da">Da</option>
-                            <option value="Ne">Ne</option>
-                        </select>
-                        <svg class="dialog-select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <label class="dialog-label" for="dEmail">Email adresa</label>
+                    <input type="text" id="dEmail" name="email" class="dialog-input" placeholder="ime@email.com" required>
                 </div>
-                <div class="dialog-field">
-                    <label class="dialog-label" for="d-contact">Kontakt</label>
-                    <input type="text" id="d-contact" name="contact" class="dialog-input" placeholder="Tel. broj ili email" required>
-                </div>
-                <p class="dialog-error" id="dialogError" hidden></p>
-                <button type="submit" class="dialog-submit">Pošalji →</button>
+                <p class="dialog-error" id="dError" hidden></p>
+                <button type="submit" class="dialog-submit" id="dSubmit">Pošalji →</button>
             </form>
+
+            <!-- Step 2b: no web — checklist + email to receive PDF -->
+            <div id="dNoWeb" hidden>
+                <p class="d-info-intro">Pošaljemo vam besplatni vodič — što bi vaša web stranica trebala sadržavati:</p>
+                <ul class="d-info-list">
+                    <li>Jasnu poruku tko ste i kome pomažete</li>
+                    <li>Popis usluga s kratkim opisima</li>
+                    <li>Reference i iskustvo tima</li>
+                    <li>Recenzije i preporuke klijenata</li>
+                    <li>Jednostavan kontakt i lokaciju</li>
+                </ul>
+                <form id="dFormNoWeb" class="dialog-form" style="gap:0.75rem;">
+                    <div class="dialog-field" style="margin:0;">
+                        <label class="dialog-label" for="dNoWebEmail">Vaša email adresa</label>
+                        <input type="text" id="dNoWebEmail" class="dialog-input" placeholder="ime@email.com" required>
+                    </div>
+                    <p class="dialog-error" id="dNoWebError" hidden></p>
+                    <button type="submit" class="dialog-submit" id="dNoWebSubmit" style="margin-top:0;">Pošalji vodič →</button>
+                </form>
+            </div>
+
+            <!-- Success -->
             <div class="dialog-success" id="dialogSuccess">
                 <div class="dialog-success-icon">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                         <path d="M6 14l6 6 10-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <h4>Primljeno!</h4>
-                <p>Javit ću se uskoro.</p>
+                <h4 id="dSuccessTitle">Primljeno!</h4>
+                <p id="dSuccessMsg">Javit ću se uskoro.</p>
             </div>
         </div>
     </div>
@@ -3808,6 +4073,161 @@
             window.addEventListener('touchend',   onEnd);
         })();
 
+        // ---- Dialog — context-aware open + step flow ----
+        (function () {
+            var overlay    = document.getElementById('dialogOverlay');
+            var titleEl    = document.getElementById('dialogTitle');
+            var subtitleEl = document.getElementById('dialogSubtitle');
+            var step1      = document.getElementById('dStep1');
+            var formHasWeb = document.getElementById('dFormHasWeb');
+            var noWebPanel = document.getElementById('dNoWeb');
+            var successEl  = document.getElementById('dialogSuccess');
+            var dSubmit      = document.getElementById('dSubmit');
+            var dError       = document.getElementById('dError');
+            var formNoWeb    = document.getElementById('dFormNoWeb');
+            var dNoWebSubmit = document.getElementById('dNoWebSubmit');
+            var dNoWebError  = document.getElementById('dNoWebError');
+            if (!overlay || !step1) return;
+
+            var CONFIGS = {
+                hero: {
+                    title:        'Besplatna analiza',
+                    subtitle:     'Saznajte kako potencijalni klijenti vide vaš ured.',
+                    submitText:   'Pošalji na analizu →',
+                    successTitle: 'Analiza u izradi!',
+                    successMsg:   'Javit ću se unutar 24 sata s konkretnim nalazima.',
+                    apiType:      'analiza'
+                },
+                assessment: {
+                    title:        'Brza procjena',
+                    subtitle:     'Konkretna povratna informacija o vašoj online prisutnosti.',
+                    submitText:   'Pošalji →',
+                    successTitle: 'Primljeno!',
+                    successMsg:   'Javit ću se uskoro s procjenom.',
+                    apiType:      'procjena'
+                }
+            };
+
+            var currentCfg = CONFIGS.hero;
+
+            function resetDialog() {
+                step1.hidden     = false;
+                formHasWeb.hidden = true;
+                noWebPanel.hidden = true;
+                successEl.style.display = 'none';
+                if (dError)       { dError.hidden = true; dError.textContent = ''; }
+                if (dSubmit)      { dSubmit.disabled = false; dSubmit.textContent = currentCfg.submitText; }
+                if (dNoWebError)  { dNoWebError.hidden = true; dNoWebError.textContent = ''; }
+                if (dNoWebSubmit) { dNoWebSubmit.disabled = false; dNoWebSubmit.textContent = 'Pošalji vodič →'; }
+                var urlInput      = document.getElementById('dUrl');
+                var emailInput    = document.getElementById('dEmail');
+                var noWebEmail    = document.getElementById('dNoWebEmail');
+                if (urlInput)   urlInput.value   = '';
+                if (emailInput) emailInput.value = '';
+                if (noWebEmail) noWebEmail.value = '';
+            }
+
+            document.querySelectorAll('.js-open-dialog').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    currentCfg = CONFIGS[btn.dataset.dialog] || CONFIGS.hero;
+                    titleEl.textContent    = currentCfg.title;
+                    subtitleEl.textContent = currentCfg.subtitle;
+                    resetDialog();
+                });
+            });
+
+            step1.querySelectorAll('.fa-choice-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    step1.hidden = true;
+                    if (btn.dataset.choice === 'has-web') {
+                        formHasWeb.hidden = false;
+                        document.getElementById('dUrl').focus();
+                    } else {
+                        noWebPanel.hidden = false;
+                    }
+                });
+            });
+
+            formNoWeb.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (dNoWebError) dNoWebError.hidden = true;
+                var email = document.getElementById('dNoWebEmail').value.trim();
+                if (!email) {
+                    dNoWebError.textContent = 'Unesite email adresu.';
+                    dNoWebError.hidden = false;
+                    return;
+                }
+                dNoWebSubmit.disabled    = true;
+                dNoWebSubmit.textContent = 'Šaljem...';
+
+                fetch('https://web-compose.onrender.com/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        'app-id':     'wortkraftmaster',
+                        'service-id': 'contact',
+                        name:    email,
+                        email:   email,
+                        message: 'Tip: ' + currentCfg.apiType + '-no-web (PDF vodič)\nEmail: ' + email
+                    })
+                })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('server');
+                    noWebPanel.hidden = true;
+                    document.getElementById('dSuccessTitle').textContent = 'Na putu je!';
+                    document.getElementById('dSuccessMsg').textContent   = 'PDF vodič šaljemo na ' + email + '.';
+                    successEl.style.display = 'flex';
+                })
+                .catch(function () {
+                    dNoWebSubmit.disabled    = false;
+                    dNoWebSubmit.textContent = 'Pošalji vodič →';
+                    if (dNoWebError) {
+                        dNoWebError.textContent = 'Greška. Pokušajte ponovo ili nas kontaktirajte direktno.';
+                        dNoWebError.hidden = false;
+                    }
+                });
+            });
+
+            formHasWeb.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (dError) dError.hidden = true;
+                dSubmit.disabled    = true;
+                dSubmit.textContent = 'Šaljem...';
+
+                var rawUrl  = document.getElementById('dUrl').value.trim();
+                var safeUrl = rawUrl.replace(/\./g, ' XY ');
+                var contact = document.getElementById('dEmail').value.trim();
+                var isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+
+                fetch('https://web-compose.onrender.com/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        'app-id':     'wortkraftmaster',
+                        'service-id': 'contact',
+                        name:    contact,
+                        email:   isEmail ? contact : 'noreply@wortkraftmaster.org',
+                        message: 'Tip: ' + currentCfg.apiType + '\nWeb: ' + safeUrl + '\nKontakt: ' + contact
+                    })
+                })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('server');
+                    formHasWeb.hidden = true;
+                    document.getElementById('dSuccessTitle').textContent = currentCfg.successTitle;
+                    document.getElementById('dSuccessMsg').textContent   = currentCfg.successMsg;
+                    successEl.style.display = 'flex';
+                })
+                .catch(function () {
+                    dSubmit.disabled    = false;
+                    dSubmit.textContent = currentCfg.submitText;
+                    if (dError) {
+                        dError.textContent = 'Greška. Pokušajte ponovo ili nas kontaktirajte direktno.';
+                        dError.hidden = false;
+                    }
+                });
+            });
+        })();
+
         // ---- Free Analysis two-step form ----
         (function () {
             var step1 = document.getElementById('faStep1');
@@ -3851,22 +4271,22 @@
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Šaljem...';
 
-                var payload = {
-                    'app-id': 'wortkraftmaster',
-                    type: userHasWeb ? 'besplatna-analiza-ima-web' : 'besplatna-analiza-nema-web',
-                    contact: contact
-                };
-                if (userHasWeb && urlInput.value.trim()) {
-                    payload.url = urlInput.value.trim();
-                }
-                if (!userHasWeb && nameInput.value.trim()) {
-                    payload.name = nameInput.value.trim();
-                }
+                var isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+                var safeUrl = urlInput.value.trim().replace(/\./g, ' XY ');
+                var msgType = userHasWeb ? 'Besplatna analiza (ima web)' : 'Besplatna analiza (nema web)';
+                var msgBody = msgType + '\nKontakt: ' + contact;
+                if (userHasWeb && safeUrl) msgBody += '\nWeb: ' + safeUrl;
 
                 fetch('https://web-compose.onrender.com/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        'app-id':     'wortkraftmaster',
+                        'service-id': 'contact',
+                        name:    contact,
+                        email:   isEmail ? contact : 'noreply@wortkraftmaster.org',
+                        message: msgBody
+                    })
                 })
                 .then(function (res) {
                     if (!res.ok) throw new Error('server');

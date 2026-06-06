@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Marić Računovodstvo — Vaše financije u sigurnim rukama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0d0d0d;
+    --white: #ffffff;
+    --gray-50: #f8f9fa;
+    --gray-100: #f1f3f5;
+    --gray-200: #e9ecef;
+    --gray-400: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-900: #212529;
+    --accent: #1a56db;
+    --accent-light: #eff4ff;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--gray-900);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .nav-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.3px;
+  }
+  .nav-logo span {
+    color: var(--accent);
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--black); }
+  .nav-cta {
+    background: var(--black);
+    color: var(--white) !important;
+    padding: 0.5rem 1.125rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .nav-cta:hover { background: #333 !important; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 80px 32px;
+    gap: 64px;
+  }
+
+  .hero-left {}
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.35rem 0.875rem;
+    border-radius: 50px;
+    margin-bottom: 1.75rem;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: var(--black);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title .accent-word {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--gray-600);
+    max-width: 460px;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .btn-primary {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.8125rem 1.75rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.15s;
+  }
+  .btn-primary:hover { background: #333; }
+  .btn-ghost {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+  .btn-ghost:hover { color: var(--black); }
+  .btn-ghost::after { content: '→'; }
+
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.425rem;
+    font-size: 0.82rem;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+  .trust-item::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #dcfce7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5l2 2 4-4' stroke='%2316a34a' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px;
+    flex-shrink: 0;
+  }
+  .trust-sep {
+    width: 1px;
+    height: 14px;
+    background: var(--gray-200);
+  }
+
+  /* Hero right — card */
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+  }
+  .hero-card-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 1.25rem;
+  }
+
+  .stat-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .stat-item {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .stat-left {}
+  .stat-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--black);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--gray-600);
+    margin-top: 0.2rem;
+  }
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .stat-icon.blue { background: var(--accent-light); }
+  .stat-icon.green { background: #f0fdf4; }
+  .stat-icon.amber { background: #fffbeb; }
+
+  .card-cta {
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.8125rem 1.25rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.15s;
+  }
+  .card-cta:hover { background: #1447c0; }
+  .card-note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-top: 0.75rem;
+  }
+
+  /* ---- STRIP ---- */
+  .strip {
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    background: var(--gray-50);
+    padding: 1.5rem 32px;
+  }
+  .strip-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .strip-item {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .strip-item svg { opacity: 0.5; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    padding: 2.5rem 32px;
+    border-top: 1px solid var(--gray-200);
+    margin-top: auto;
+  }
+  .footer-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .footer-logo span { color: var(--accent); }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: var(--gray-600);
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--black); }
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--gray-400);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Marić<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Usluge</a></li>
+      <li><a href="#">O nama</a></li>
+      <li><a href="#">Resursi</a></li>
+      <li><a href="#" class="nav-cta">Kontaktirajte nas</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Rijeka i okolica · Osnivanje 2003.</div>
+    <h1 class="hero-title">
+      Vaše financije<br>u <span class="accent-word">sigurnim</span><br>rukama.
+    </h1>
+    <p class="hero-sub">
+      Vodimo računovodstvo za obrtnike i tvrtke — uredno, na vrijeme, bez iznenađenja. Dok vi vodite posao, mi brinemo o papirima.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Zakažite besplatni razgovor</a>
+      <a href="#" class="btn-ghost">Pogledajte usluge</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">20+ godina iskustva</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">150+ klijenata</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">Bez dugoročnih ugovora</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-label">Pregled za 2024.</div>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-left">
+            <div class="stat-num">98%</div>
+            <div class="stat-label">Zadovoljnih klijenata</div>
+          </div>
+          <div class="stat-icon green">😊</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-left">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Zakasnjelih prijava</div>
+          </div>
+          <div class="stat-icon blue">📋</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-left">
+            <div class="stat-num">48h</div>
+            <div class="stat-label">Prosječno vrijeme odgovora</div>
+          </div>
+          <div class="stat-icon amber">⚡</div>
+        </div>
+      </div>
+      <button class="card-cta">Pošaljite upit →</button>
+      <div class="card-note">Odgovaramo unutar jednog radnog dana</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 9.8l-3.7 2.7 1.4-4.3L2 5.5h4.5L8 1z" fill="#1a56db"/></svg>
+      Član HZRIF-a
+    </div>
+    <div class="strip-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#6c757d" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#6c757d" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Licencirani porezni savjetnik
+    </div>
+    <div class="strip-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#6c757d" stroke-width="1.2"/><path d="M8 5v3.5l2 2" stroke="#6c757d" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Pon – Pet, 08:00 – 16:00
+    </div>
+    <div class="strip-item">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.2 2 3 4.2 3 7c0 4 5 7 5 7s5-3 5-7c0-2.8-2.2-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="#6c757d"/></svg>
+      Korzo 14, 51000 Rijeka
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Marić<span>.</span></div>
+    <ul class="footer-links">
+      <li><a href="#">Usluge</a></li>
+      <li><a href="#">O nama</a></li>
+      <li><a href="#">Politika privatnosti</a></li>
+      <li><a href="#">Kontakt</a></li>
+    </ul>
+    <div class="footer-copy">© 2024 Računovodstveni servis Marić d.o.o.</div>
+  </div>
+</footer>
+
+</body>
+</html>

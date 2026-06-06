@@ -2040,6 +2040,282 @@
             .ap-cards-grid { grid-template-columns: repeat(2, 1fr); }
             .ap-compare    { grid-template-columns: 1fr; }
         }
+
+        /* ---- Process Timeline ---- */
+        .pt-section {
+            padding: var(--spacing-xl) 0 calc(var(--spacing-xl) + 2rem);
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .pt-timeline {
+            max-width: 940px;
+            margin: 0 auto;
+        }
+
+        /* SVG curly connector */
+        .pt-svg-wrap {
+            display: block;
+            width: 100%;
+            overflow: visible;
+            pointer-events: none;
+        }
+
+        .pt-svg-wrap svg {
+            display: block;
+            width: 100%;
+            overflow: visible;
+        }
+
+        .pt-path {
+            fill: none;
+            stroke: var(--color-gray-200);
+            stroke-width: 2.5;
+            stroke-dasharray: 3 12;
+            stroke-linecap: round;
+            vector-effect: non-scaling-stroke;
+            transition: stroke 0.5s ease;
+        }
+
+        .pt-svg-wrap.pt-active .pt-path {
+            stroke: var(--color-primary);
+            animation: ptFlow 0.65s linear infinite;
+        }
+
+        @keyframes ptFlow {
+            from { stroke-dashoffset: 15; }
+            to   { stroke-dashoffset: 0;  }
+        }
+
+        /* Step cards */
+        .pt-step {
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .pt-step[data-step="1"] { width: 65%; margin-right: auto; }
+        .pt-step[data-step="2"] { width: 65%; margin-left: auto;  }
+
+        .pt-step.is-active {
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 24px rgba(255,55,0,0.08);
+        }
+
+        .pt-step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .pt-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-gray-300);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--color-gray-700);
+            flex-shrink: 0;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .pt-step.is-active .pt-num {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #fff;
+        }
+
+        .pt-step-title {
+            flex: 1;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .pt-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-gray-300);
+            background: none;
+            color: var(--color-gray-700);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+            flex-shrink: 0;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .pt-step.open .pt-toggle {
+            transform: rotate(45deg);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .pt-body {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s ease;
+        }
+
+        .pt-step.open .pt-body { grid-template-rows: 1fr; }
+
+        .pt-body-inner { overflow: hidden; padding: 0 1.5rem; }
+
+        .pt-step.open .pt-body-inner { padding: 0 1.5rem 1.25rem; }
+
+        .pt-body-inner p {
+            font-size: 0.95rem;
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .pt-outcome {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.875rem;
+            padding: 0.75rem 1.5rem;
+            border-top: 1px solid var(--color-gray-100);
+            background: #fafafa;
+        }
+
+        .pt-outcome-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            flex-shrink: 0;
+        }
+
+        .pt-outcome-value {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #166534;
+            background: #dcfce7;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+        }
+
+
+        /* Final step */
+        .pt-step--final {
+            width: 65%;
+            margin: 0 auto;
+            border: 2px solid var(--color-primary);
+            background: #fff9f8;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+            overflow: visible;
+            cursor: default;
+        }
+
+        .pt-final-arrow-ring {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary);
+            animation: ptRingPulse 2.8s ease-in-out infinite;
+        }
+
+        @keyframes ptRingPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,55,0,0.2); }
+            50%       { box-shadow: 0 0 0 12px rgba(255,55,0,0); }
+        }
+
+        .pt-step--final .pt-step-title {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin: 0;
+        }
+
+        .pt-launch-placeholder {
+            width: 100%;
+            padding: 1.75rem 1.5rem;
+            background: rgba(255,55,0,0.03);
+            border: 1.5px dashed rgba(255,55,0,0.25);
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.875rem;
+        }
+
+        .pt-launch-dots { display: flex; gap: 10px; align-items: center; }
+
+        .pt-launch-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            opacity: 0.2;
+            animation: ptDotBounce 1.4s ease-in-out infinite;
+        }
+
+        .pt-launch-dot:nth-child(1) { animation-delay: 0s; }
+        .pt-launch-dot:nth-child(2) { animation-delay: 0.2s; }
+        .pt-launch-dot:nth-child(3) { animation-delay: 0.4s; }
+        .pt-launch-dot:nth-child(4) { animation-delay: 0.6s; }
+        .pt-launch-dot:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes ptDotBounce {
+            0%, 100% { opacity: 0.2; transform: translateY(0); }
+            50%       { opacity: 1;   transform: translateY(-6px); }
+        }
+
+        .pt-launch-label {
+            font-size: 0.78rem;
+            color: rgba(255,55,0,0.5);
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 900px) {
+            .pt-step[data-step="1"],
+            .pt-step[data-step="2"],
+            .pt-step--final {
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .pt-step-title { font-size: 1rem; }
+            .pt-step--final .pt-step-title { font-size: 1.25rem; }
+        }
+
+        @media (max-width: 600px) {
+            .pt-step[data-step="1"],
+            .pt-step[data-step="2"],
+            .pt-step--final { width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -2298,6 +2574,7 @@
     <section id="transformacija" class="s6-section">
         <div class="container">
             <h2 class="ap-title">Predstavlja li vaša web stranica kvalitetu servisa?</h2>
+            <p class="ap-note" style="border-top: none; padding-top: 0; margin-bottom: var(--spacing-lg);"><span class="underline-text">Brza procjena</span></p>
 
             <!-- Score legend -->
             <div class="ap-score-legend">
@@ -2311,7 +2588,7 @@
                 <div class="ap-question">
                     <div class="ap-question-text">
                         <span class="ap-question-num">1.1</span>
-                        <p>Može li posjetitelj odmah razumjeti čime se bavite i kome su usluge namijenjene?</p>
+                        <p>Može li posjetitelj u prvih 10 sekundi razumjeti čime se bavite, kome pomažete i zašto odabrati upravo vas?</p>
                     </div>
                     <div class="ap-score-btns">
                         <button class="ap-score-btn" data-val="0">0</button>
@@ -2322,7 +2599,7 @@
                 <div class="ap-question">
                     <div class="ap-question-text">
                         <span class="ap-question-num">2.1</span>
-                        <p>Jesu li godine iskustva i reference klijenata jasno istaknute?</p>
+                        <p>Jesu li iskustvo, reference i stručnost jasno vidljivi?</p>
                     </div>
                     <div class="ap-score-btns">
                         <button class="ap-score-btn" data-val="0">0</button>
@@ -2333,7 +2610,7 @@
                 <div class="ap-question">
                     <div class="ap-question-text">
                         <span class="ap-question-num">3.1</span>
-                        <p>Objašnjavate li koristi za klijenta, a ne samo popis usluga?</p>
+                        <p>Objašnjava li web stranica koristi za klijenta, a ne samo popis usluga?</p>
                     </div>
                     <div class="ap-score-btns">
                         <button class="ap-score-btn" data-val="0">0</button>
@@ -2344,7 +2621,7 @@
                 <div class="ap-question">
                     <div class="ap-question-text">
                         <span class="ap-question-num">4.1</span>
-                        <p>Ima li web stranica jasan poziv na akciju i jednostavan kontakt?</p>
+                        <p>Može li vas potencijalni klijent jednostavno kontaktirati?</p>
                     </div>
                     <div class="ap-score-btns">
                         <button class="ap-score-btn" data-val="0">0</button>
@@ -2357,7 +2634,7 @@
             <!-- CTA -->
             <div class="ap-cta-block">
                 <p>Ovo su samo 4 od više od 35 pitanja koja zajedno daju jasnu sliku o tome koliko vaša web stranica gradi povjerenje kod potencijalnih klijenata.</p>
-                <button type="button" class="btn-primary btn-large js-open-dialog">Preuzmi cijeli test</button>
+                <button type="button" class="btn-primary btn-large js-open-dialog">Brza procjena</button>
             </div>
         </div>
     </section>
@@ -2369,8 +2646,7 @@
     <section id="how-i-help" class="how-i-help">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Kako vam mogu pomoći</span>
-                <h2 class="nws-headline">Kako profesionalna web stranica pomaže vašem servisu?</h2>
+                <h2 class="nws-headline">Kako kvalitetna web stranica pomaže vašem servisu?</h2>
             </div>
             <div class="benefits-list">
                 <div class="benefit-item">
@@ -2583,34 +2859,105 @@
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section id="process" class="process">
+    <!-- Process Timeline Section -->
+    <section id="process" class="pt-section">
         <div class="container">
+
+            <!-- Title + intro curly path from testimonials area down to step 1 (left) -->
             <div class="section-header">
                 <span class="section-label">Proces suradnje</span>
                 <h2 class="section-title">Kako suradnja izgleda</h2>
             </div>
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="process-number">1</div>
-                    <h3 class="process-title">Besplatna analiza</h3>
-                    <p class="process-description">Pregled postojeće web stranice.</p>
+
+            <div class="pt-timeline">
+
+                <!--
+                    Intro connector: center-top → curves down-left to step 1.
+                    Step 1 card is 46% wide left-aligned → its center ≈ 23% of 940px ≈ x=216.
+                    Path starts from the section title (center, x=470) and sweeps left-downward.
+                    The wave adds a right-lean then left-lean for a curly feel.
+                -->
+                <div class="pt-svg-wrap" id="ptSvg0">
+                    <svg viewBox="0 0 940 140" preserveAspectRatio="none" height="140" aria-hidden="true">
+                        <path class="pt-path"
+                              d="M 470 0
+                                 C 470 35, 580 55, 470 84
+                                 C 360 112, 305 125, 305 140"/>
+                    </svg>
                 </div>
-                <div class="process-step">
-                    <div class="process-number">2</div>
-                    <h3 class="process-title">Prijedlog poboljšanja</h3>
-                    <p class="process-description">Dobivate konkretne prijedloge.</p>
+
+                <!-- Step 1 — left side -->
+                <div class="pt-step" data-step="1">
+                    <div class="pt-step-header">
+                        <div class="pt-num">1</div>
+                        <h3 class="pt-step-title">Besplatna analiza</h3>
+                        <button class="pt-toggle" aria-expanded="false">+</button>
+                    </div>
+                    <div class="pt-body">
+                        <div class="pt-body-inner">
+                            <p>Kratki razgovor ili email — analiziramo vašu postojeću web stranicu i dajemo konkretan uvid što funkcionira, a što ne. Bez obveza i bez pritiska.</p>
+                        </div>
+                    </div>
+                    <div class="pt-outcome">
+<span class="pt-outcome-value">Neobavezni demo</span>
+                    </div>
                 </div>
-                <div class="process-step">
-                    <div class="process-number">3</div>
-                    <h3 class="process-title">Izrada nove stranice</h3>
-                    <p class="process-description">Moderan i profesionalan nastup.</p>
+
+                <div class="pt-svg-wrap" id="ptSvg1">
+                    <svg viewBox="0 0 940 182" preserveAspectRatio="none" height="182" aria-hidden="true">
+                        <path class="pt-path"
+                              d="M 305 0
+                                 C 305 46, 720 66, 635 91
+                                 C 550 116, 635 155, 635 182"/>
+                    </svg>
                 </div>
-                <div class="process-step">
-                    <div class="process-number">4</div>
-                    <h3 class="process-title">Objava i podrška</h3>
-                    <p class="process-description">Pomoć nakon lansiranja.</p>
+
+                <!-- Step 2 — right side -->
+                <div class="pt-step" data-step="2">
+                    <div class="pt-step-header">
+                        <div class="pt-num">2</div>
+                        <h3 class="pt-step-title">Izrada web stranice</h3>
+                        <button class="pt-toggle" aria-expanded="false">+</button>
+                    </div>
+                    <div class="pt-body">
+                        <div class="pt-body-inner">
+                            <p>Dizajniramo i razvijamo vašu web stranicu prema dogovorenom planu. Redovito vas informiramo o napretku i uključujemo vaše povratne informacije u svakom koraku.</p>
+                        </div>
+                    </div>
+                    <div class="pt-outcome">
+<span class="pt-outcome-value">Stranica spremna za objavu</span>
+                    </div>
                 </div>
+
+                <div class="pt-svg-wrap" id="ptSvg2">
+                    <svg viewBox="0 0 940 140" preserveAspectRatio="none" height="140" aria-hidden="true">
+                        <path class="pt-path"
+                              d="M 635 0
+                                 C 635 35, 300 55, 470 84
+                                 C 640 112, 470 125, 470 140"/>
+                    </svg>
+                </div>
+
+                <!-- Step 3 — Final (centered) -->
+                <div class="pt-step pt-step--final" data-step="3">
+                    <div class="pt-final-arrow-ring">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M6 14H22M22 14L14 6M22 14L14 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="pt-step-title">Idete online</h3>
+                    <div class="pt-launch-placeholder">
+                        <div class="pt-launch-dots">
+                            <span class="pt-launch-dot"></span>
+                            <span class="pt-launch-dot"></span>
+                            <span class="pt-launch-dot"></span>
+                            <span class="pt-launch-dot"></span>
+                            <span class="pt-launch-dot"></span>
+                        </div>
+                        <span class="pt-launch-label">animacija dolazi uskoro</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -3025,6 +3372,51 @@
                 if (!isOpen) item.classList.add('open');
             });
         });
+        // Process Timeline
+        (function () {
+            // Expand / collapse on header click
+            document.querySelectorAll('.pt-step-header').forEach(function (header) {
+                header.addEventListener('click', function () {
+                    var step = header.closest('.pt-step');
+                    var isOpen = step.classList.contains('open');
+                    document.querySelectorAll('.pt-step').forEach(function (s) {
+                        s.classList.remove('open');
+                        var btn = s.querySelector('.pt-toggle');
+                        if (btn) btn.setAttribute('aria-expanded', 'false');
+                    });
+                    if (!isOpen) {
+                        step.classList.add('open');
+                        header.querySelector('.pt-toggle').setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+            // Highlight step card when in viewport
+            var ptSteps = document.querySelectorAll('.pt-step:not(.pt-step--final)');
+            var stepObs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-active');
+                    } else {
+                        entry.target.classList.remove('is-active');
+                    }
+                });
+            }, { threshold: 0.35 });
+            ptSteps.forEach(function (s) { stepObs.observe(s); });
+
+            // Activate curly SVG connectors when they scroll into view
+            var svgWraps = document.querySelectorAll('.pt-svg-wrap');
+            var svgObs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('pt-active');
+                    } else {
+                        entry.target.classList.remove('pt-active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            svgWraps.forEach(function (w) { svgObs.observe(w); });
+        })();
     </script>
 </body>
 </html>

@@ -1534,11 +1534,104 @@
 
         /* ---- Before/After Section ---- */
         .before-after {
-            padding: var(--spacing-xl) 0 0;
+            padding: 2rem 0 1.5rem;
         }
 
-        .ba-grid {
-            margin-top: var(--spacing-lg);
+        #before-after .section-header {
+            margin-bottom: 1.25rem;
+        }
+
+        /* Slider */
+        .ba-slider-wrap {
+            margin-top: 0;
+        }
+
+        /* Override monitor size — back-calculated so total height = 65vh.
+           screen_h = 65vh - 76px (bezel 28 + neck 36 + foot 12)
+           screen_w = screen_h × (16/10)
+           frame_w  = screen_w + 28px (bezel lr padding) */
+        .ba-monitor-wrap {
+            max-width: 100%;
+            width: calc((65vh - 76px) * 1.6 + 28px);
+            margin: 0 auto;
+        }
+
+        .ba-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: default;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .ba-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            pointer-events: none;
+        }
+
+        .ba-img-after {
+            clip-path: inset(0 0 0 50%);
+        }
+
+        .ba-divider {
+            position: absolute;
+            top: 0; bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .ba-overlay-label {
+            position: absolute;
+            bottom: 1.25rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .ba-overlay-label.before {
+            left: 1.25rem;
+            background: rgba(0,0,0,0.45);
+            color: #fff;
+        }
+        .ba-overlay-label.after {
+            right: 1.25rem;
+            background: var(--color-primary);
+            color: #fff;
+        }
+
+        /* Tags below slider */
+        .ba-tags-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .ba-tags-row .cs-tag {
+            padding: 0.45rem 1rem;
+        }
+        .ba-tags-group {
+            display: flex;
+            gap: 0.95rem;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            flex-wrap: wrap;
         }
 
         .ba-col {
@@ -1565,6 +1658,30 @@
             background: var(--color-primary);
             color: #fff;
         }
+
+        .ba-tags-group.ba-dim {
+            opacity: 0.25;
+            transform: scale(0.95);
+        }
+
+        .ba-tags-group.ba-active .cs-tag {
+            transform: scale(1.08);
+            transition: transform 0.4s ease;
+        }
+
+        .ba-tags-group.ba-active .ba-tag-good {
+            background: #bbf7d0;
+            color: #15803d;
+            font-weight: 600;
+        }
+
+        .ba-tags-group.ba-active .ba-tag-bad {
+            background: #fecaca;
+            color: #991b1b;
+            font-weight: 600;
+        }
+
+        .cs-tag { transition: background 0.4s ease, color 0.4s ease, transform 0.4s ease; }
 
         .ba-tag-bad {
             background: #fff0f0;
@@ -2299,6 +2416,178 @@
             text-transform: uppercase;
         }
 
+        /* ---- Free Analysis Two-Step Form ---- */
+
+        /* Card stretches to match left-side height */
+        #free-analysis .pricing-content {
+            align-items: stretch;
+        }
+        #free-analysis .pricing-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Promise blocks (replaces flat trust bar) */
+        .fa-promises {
+            display: flex;
+            flex-direction: column;
+            gap: 1.125rem;
+            margin-bottom: 2rem;
+            padding: 1.25rem 1.25rem;
+            background: #f9fafb;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-gray-100);
+        }
+        .fa-promise {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+        }
+        .fa-promise-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .fa-promise--time .fa-promise-icon {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+        }
+        .fa-promise--free .fa-promise-icon {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+        .fa-promise-icon svg {
+            display: block;
+        }
+        .fa-promise-body {}
+        .fa-promise-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            line-height: 1.3;
+        }
+        .fa-promise-sub {
+            font-size: 0.76rem;
+            color: var(--color-gray-500);
+            margin-top: 0.1rem;
+            line-height: 1.4;
+        }
+        .fa-choices-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--color-gray-400);
+            margin-bottom: 0.625rem;
+        }
+
+        .fa-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .fa-choice-btn {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            background: var(--color-gray-100);
+            border: 1.5px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-gray-900);
+            cursor: pointer;
+            text-align: left;
+            transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+        }
+
+        .fa-choice-btn:hover {
+            border-color: var(--color-primary);
+            background: #fff9f8;
+            color: var(--color-primary);
+        }
+
+        #faStep2 {
+            padding-top: 0.75rem;
+        }
+
+        .fa-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .fa-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            color: var(--color-gray-900);
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .fa-input:focus {
+            border-color: var(--color-primary);
+        }
+
+        .fa-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .fa-error {
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            margin: 0;
+        }
+
+        .fa-success {
+            text-align: center;
+            padding: 1.5rem 0 0.5rem;
+        }
+
+        .fa-success-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #dcfce7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .fa-success h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .fa-success p {
+            font-size: 0.9rem;
+            color: var(--color-gray-700);
+            margin: 0;
+        }
+
+        .fa-step-2 {
+            animation: faSlideIn 0.3s ease;
+        }
+
+        @keyframes faSlideIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 900px) {
             .pt-step[data-step="1"],
             .pt-step[data-step="2"],
@@ -2721,97 +3010,48 @@
                 <h2 class="section-title">Primjer unapređenja web stranice</h2>
             </div>
         </div>
-        <div class="testimonials-grid ba-grid">
+        <div class="ba-slider-wrap container">
 
-            <!-- Left — Prije -->
-            <div class="testimonials-col ba-col">
-                <span class="ba-label ba-label-before">Prije</span>
-                <div class="case-study-item cs-case-left">
-                    <div class="cs-monitor-wrap">
-                        <div class="cs-monitor-frame">
-                            <div class="cs-monitor-screen">
-                                <div class="cs-screen-placeholder cs-screen-before">
-                                    <div class="cs-ph-navbar-old">
-                                        <div class="cs-ph-logo-old"></div>
-                                        <div class="cs-ph-navlinks-old">
-                                            <div class="cs-ph-link-old"></div>
-                                            <div class="cs-ph-link-old"></div>
-                                            <div class="cs-ph-link-old"></div>
-                                            <div class="cs-ph-link-old"></div>
-                                            <div class="cs-ph-link-old"></div>
-                                        </div>
-                                        <div class="cs-ph-cta-old"></div>
-                                    </div>
-                                    <div class="cs-ph-hero-before">
-                                        <div class="cs-ph-h1-old"></div>
-                                        <div class="cs-ph-h1-old short"></div>
-                                        <div class="cs-ph-text-old" style="margin-top:4px;"></div>
-                                        <div class="cs-ph-text-old w70"></div>
-                                        <div class="cs-ph-text-old w55"></div>
-                                        <div class="cs-ph-cta-old-btn"></div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="cs-monitor-wrap ba-monitor-wrap">
+                <div class="cs-monitor-frame">
+                    <div class="cs-monitor-screen">
+
+                        <div class="ba-slider" id="baSlider">
+                            <!-- Before image (bottom layer, full width) -->
+                            <img class="ba-img ba-img-before"
+                                 src="images/before-screenshot.png"
+                                 alt="Web stranica prije redizajna">
+
+                            <!-- After image (clipped, top layer) -->
+                            <img class="ba-img ba-img-after" id="baAfterImg"
+                                 src="images/after-screenshot.png"
+                                 alt="Web stranica nakon redizajna">
+
+                            <!-- Labels -->
+                            <span class="ba-overlay-label before">Prije</span>
+                            <span class="ba-overlay-label after">Poslije</span>
+
+                            <!-- Divider line -->
+                            <div class="ba-divider" id="baDivider"></div>
                         </div>
-                        <div class="cs-monitor-neck"></div>
-                        <div class="cs-monitor-foot"></div>
-                    </div>
-                    <div class="cs-info">
-                        <div class="cs-project-tags">
-                            <span class="cs-tag ba-tag-bad">zastarjeli izgled</span>
-                            <span class="cs-tag ba-tag-bad">nejasna poruka</span>
-                            <span class="cs-tag ba-tag-bad">slab CTA</span>
-                        </div>
+
                     </div>
                 </div>
+                <div class="cs-monitor-neck"></div>
+                <div class="cs-monitor-foot"></div>
             </div>
 
-            <!-- Divider -->
-            <div class="testimonials-divider"></div>
-
-            <!-- Right — Poslije -->
-            <div class="testimonials-col ba-col">
-                <span class="ba-label ba-label-after">Poslije</span>
-                <div class="case-study-item cs-case-right">
-                    <div class="cs-monitor-wrap">
-                        <div class="cs-monitor-frame">
-                            <div class="cs-monitor-screen">
-                                <div class="cs-screen-placeholder cs-screen-light">
-                                    <div class="cs-ph-navbar">
-                                        <div class="cs-ph-logo"></div>
-                                        <div class="cs-ph-navlinks">
-                                            <div class="cs-ph-link"></div>
-                                            <div class="cs-ph-link"></div>
-                                            <div class="cs-ph-link"></div>
-                                        </div>
-                                        <div class="cs-ph-navbtn light-btn"></div>
-                                    </div>
-                                    <div class="cs-ph-hero-light">
-                                        <div class="cs-ph-h1"></div>
-                                        <div class="cs-ph-h1 accent"></div>
-                                        <div class="cs-ph-sub"></div>
-                                        <div class="cs-ph-cta-row">
-                                            <div class="cs-ph-cta red"></div>
-                                        </div>
-                                    </div>
-                                    <div class="ba-trust-row">
-                                        <div class="ba-trust-card"></div>
-                                        <div class="ba-trust-card"></div>
-                                        <div class="ba-trust-card"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cs-monitor-neck"></div>
-                        <div class="cs-monitor-foot"></div>
-                    </div>
-                    <div class="cs-info">
-                        <div class="cs-project-tags">
-                            <span class="cs-tag ba-tag-good">profesionalan nastup</span>
-                            <span class="cs-tag ba-tag-good">jasno definirane usluge</span>
-                            <span class="cs-tag ba-tag-good">naglašeno povjerenje</span>
-                        </div>
-                    </div>
+            <!-- Tags below -->
+            <div class="ba-tags-row">
+                <div class="ba-tags-group" id="baTagsBad">
+                    <span class="cs-tag ba-tag-bad">zastarjeli izgled</span>
+                    <span class="cs-tag ba-tag-bad">nejasna poruka</span>
+                    <span class="cs-tag ba-tag-bad">slab CTA</span>
+                </div>
+                <div class="ba-tags-group" id="baTagsGood">
+                    <span class="cs-tag ba-tag-good">profesionalan nastup</span>
+                    <span class="cs-tag ba-tag-good">jasna vrijednost</span>
+                    <span class="cs-tag ba-tag-good">naglašeno povjerenje</span>
                 </div>
             </div>
 
@@ -2966,16 +3206,13 @@
     <section id="free-analysis" class="pricing">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Besplatna analiza</span>
+                <span class="section-label">Prvi korak</span>
             </div>
             <div class="pricing-content">
                 <div class="pricing-text">
                     <h2 class="section-title pricing-title-creative">
                         <span class="title-line">
                             <span class="text-black">Besplatna analiza</span>
-                        </span>
-                        <span class="title-line">
-                            <span class="text-gray">vaše web stranice</span>
                         </span>
                     </h2>
                     <div class="pricing-manifesto">
@@ -2988,19 +3225,63 @@
                     </div>
                 </div>
                 <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3 class="pricing-plan">Dobivate</h3>
+
+                    <!-- Promise blocks -->
+                    <div class="fa-promises">
+                        <div class="fa-promise fa-promise--time">
+                            <div class="fa-promise-icon">
+                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                    <circle cx="7.5" cy="7.5" r="6.5" stroke="#3b82f6" stroke-width="1.2"/>
+                                    <path d="M7.5 4v3.5l2 2" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="fa-promise-body">
+                                <div class="fa-promise-label">Demo stranica za 24 sata</div>
+                                <div class="fa-promise-sub">Vidite rezultat prije bilo kakve odluke</div>
+                            </div>
+                        </div>
+                        <div class="fa-promise fa-promise--free">
+                            <div class="fa-promise-icon">
+                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                    <path d="M3 7.5l3 3 6-6" stroke="#16a34a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="fa-promise-body">
+                                <div class="fa-promise-label">Potpuno besplatno</div>
+                                <div class="fa-promise-sub">Bez ugovora i skrivenih troškova</div>
+                            </div>
+                        </div>
                     </div>
-                    <ul class="pricing-features">
-                        <li>pregled prvog dojma</li>
-                        <li>analizu povjerenja i profesionalnosti</li>
-                        <li>prijedloge poboljšanja</li>
-                        <li>pregled mobilnog iskustva</li>
-                        <li>kratki video s preporukama</li>
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>Consectetur adipiscing elit</li>
-                    </ul>
-                    <button type="button" class="btn-primary btn-large js-open-dialog" style="margin-top: var(--spacing-md); width: 100%;">Zatražite besplatnu analizu</button>
+
+                    <!-- Step 1: choice -->
+                    <p class="fa-choices-label">Imate li već web stranicu?</p>
+                    <div class="fa-choices" id="faStep1">
+                        <button class="fa-choice-btn" data-choice="has-web">Da, imam web stranicu</button>
+                        <button class="fa-choice-btn" data-choice="no-web">Nemam web stranicu</button>
+                    </div>
+
+                    <!-- Step 2: form (hidden until choice is made) -->
+                    <div id="faStep2" hidden>
+                        <form class="fa-form" id="faForm">
+                            <input type="url" id="faUrl" name="url" class="fa-input" placeholder="URL vaše web stranice (npr. vasservise.hr)"/>
+                            <input type="text" id="faName" name="name" class="fa-input" placeholder="Ime" style="display:none;"/>
+                            <input type="text" id="faContact" name="contact" class="fa-input" placeholder="Tel. broj ili email" required/>
+                            <p class="fa-error" id="faError" hidden></p>
+                            <button type="submit" class="btn-primary btn-large" style="width:100%;">Kreni</button>
+                        </form>
+                    </div>
+
+                    <!-- Success state -->
+                    <div id="faSuccess" hidden class="fa-success">
+                        <div class="fa-success-icon">
+                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                                <path d="M4 11l5 5 9-9" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h4>Primljeno!</h4>
+                        <p>Javit ću se u roku od 24 sata.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -3416,6 +3697,189 @@
                 });
             }, { threshold: 0.1 });
             svgWraps.forEach(function (w) { svgObs.observe(w); });
+        })();
+
+        // ---- Before/After auto slider ----
+        (function () {
+            var slider   = document.getElementById('baSlider');
+            var afterImg = document.getElementById('baAfterImg');
+            var divider  = document.getElementById('baDivider');
+            if (!slider || !afterImg || !divider) return;
+
+            var labelBefore = slider.querySelector('.ba-overlay-label.before');
+            var labelAfter  = slider.querySelector('.ba-overlay-label.after');
+            var tagsBad     = document.getElementById('baTagsBad');
+            var tagsGood    = document.getElementById('baTagsGood');
+            var lastSide    = null;
+
+            var pct      = 98;   // current position
+            var dragging = false;
+            var animFrame, resumeTimer;
+
+            var SWEEP_MS   = 2400; // time to sweep across
+            var PAUSE_MS   = 2800; // pause at each end
+            var FROM_PCT   = 100;  // start = all before
+            var TO_PCT     = 0;    // end   = all after
+
+            function applyPos(p) {
+                pct = p;
+                divider.style.left = p + '%';
+                afterImg.style.clipPath = 'inset(0 0 0 ' + p + '%)';
+                // fade labels: before fades out as divider moves left, after fades in
+                if (labelBefore) labelBefore.style.opacity = Math.min(1, p / 40);
+                if (labelAfter)  labelAfter.style.opacity  = Math.min(1, (100 - p) / 40);
+                // emphasise tag group matching the dominant side (only toggle on threshold cross)
+                var side = p > 50 ? 'bad' : 'good';
+                if (side !== lastSide) {
+                    lastSide = side;
+                    if (tagsBad && tagsGood) {
+                        tagsBad.classList.toggle('ba-active', side === 'bad');
+                        tagsBad.classList.toggle('ba-dim',    side !== 'bad');
+                        tagsGood.classList.toggle('ba-active', side === 'good');
+                        tagsGood.classList.toggle('ba-dim',    side !== 'good');
+                    }
+                }
+            }
+
+            function ease(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+
+            var sweepTs, sweepFrom, sweepTo;
+
+            function sweepFrame(ts) {
+                if (dragging) return;
+                if (!sweepTs) sweepTs = ts;
+                var t = Math.min(1, (ts - sweepTs) / SWEEP_MS);
+                applyPos(sweepFrom + (sweepTo - sweepFrom) * ease(t));
+                if (t < 1) {
+                    animFrame = requestAnimationFrame(sweepFrame);
+                } else {
+                    // pause then sweep back
+                    resumeTimer = setTimeout(function () {
+                        if (dragging) return;
+                        sweepTs   = null;
+                        sweepFrom = sweepTo;
+                        sweepTo   = sweepTo === TO_PCT ? FROM_PCT : TO_PCT;
+                        animFrame = requestAnimationFrame(sweepFrame);
+                    }, PAUSE_MS);
+                }
+            }
+
+            function startAuto(fromPct) {
+                cancelAnimationFrame(animFrame);
+                clearTimeout(resumeTimer);
+                sweepTs   = null;
+                sweepFrom = fromPct !== undefined ? fromPct : FROM_PCT;
+                sweepTo   = TO_PCT;
+                applyPos(sweepFrom);
+                animFrame = requestAnimationFrame(sweepFrame);
+            }
+
+            // Kick off when slider enters view
+            var obs = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) { startAuto(); obs.disconnect(); }
+            }, { threshold: 0.4 });
+            obs.observe(slider);
+
+            // Manual drag — pauses auto, resumes after 2s idle
+            function clientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+
+            function onStart(e) {
+                dragging = true;
+                cancelAnimationFrame(animFrame);
+                clearTimeout(resumeTimer);
+                onMove(e);
+            }
+            function onMove(e) {
+                if (!dragging) return;
+                var r = slider.getBoundingClientRect();
+                applyPos(Math.max(0, Math.min(100, (clientX(e) - r.left) / r.width * 100)));
+            }
+            function onEnd() {
+                if (!dragging) return;
+                dragging = false;
+                resumeTimer = setTimeout(function () { startAuto(pct); }, 2000);
+            }
+
+            slider.addEventListener('mousedown',  onStart);
+            window.addEventListener('mousemove',  onMove);
+            window.addEventListener('mouseup',    onEnd);
+            slider.addEventListener('touchstart', onStart, { passive: true });
+            window.addEventListener('touchmove',  onMove,  { passive: true });
+            window.addEventListener('touchend',   onEnd);
+        })();
+
+        // ---- Free Analysis two-step form ----
+        (function () {
+            var step1 = document.getElementById('faStep1');
+            var step2 = document.getElementById('faStep2');
+            var urlInput = document.getElementById('faUrl');
+            var nameInput = document.getElementById('faName');
+            var contactInput = document.getElementById('faContact');
+            var form = document.getElementById('faForm');
+            var errorEl = document.getElementById('faError');
+            var successEl = document.getElementById('faSuccess');
+            if (!step1 || !step2 || !form) return;
+
+            var userHasWeb = false;
+
+            step1.querySelectorAll('.fa-choice-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    userHasWeb = btn.dataset.choice === 'has-web';
+                    urlInput.required = userHasWeb;
+                    urlInput.style.display = userHasWeb ? '' : 'none';
+                    nameInput.style.display = userHasWeb ? 'none' : '';
+                    step1.hidden = true;
+                    step2.hidden = false;
+                    step2.classList.add('fa-step-2');
+                    (userHasWeb ? urlInput : nameInput).focus();
+                });
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                errorEl.hidden = true;
+
+                var contact = contactInput.value.trim();
+                if (!contact) {
+                    errorEl.textContent = 'Unesite tel. broj ili email.';
+                    errorEl.hidden = false;
+                    contactInput.focus();
+                    return;
+                }
+
+                var submitBtn = form.querySelector('[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Šaljem...';
+
+                var payload = {
+                    'app-id': 'wortkraftmaster',
+                    type: userHasWeb ? 'besplatna-analiza-ima-web' : 'besplatna-analiza-nema-web',
+                    contact: contact
+                };
+                if (userHasWeb && urlInput.value.trim()) {
+                    payload.url = urlInput.value.trim();
+                }
+                if (!userHasWeb && nameInput.value.trim()) {
+                    payload.name = nameInput.value.trim();
+                }
+
+                fetch('https://web-compose.onrender.com/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('server');
+                    step2.hidden = true;
+                    successEl.hidden = false;
+                })
+                .catch(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Kreni';
+                    errorEl.textContent = 'Greška. Pokušajte ponovo ili nas kontaktirajte direktno.';
+                    errorEl.hidden = false;
+                });
+            });
         })();
     </script>
 </body>

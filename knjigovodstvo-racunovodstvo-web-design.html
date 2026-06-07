@@ -1534,7 +1534,7 @@
 
         /* ---- Before/After Section ---- */
         .before-after {
-            padding: calc(var(--spacing-xl) + 4rem) 0 1.5rem;
+            padding: var(--spacing-md) 0 1.5rem;
             background: var(--color-gray-100);
         }
 
@@ -1607,13 +1607,88 @@
         }
         .ba-overlay-label.before {
             left: 1.25rem;
-            background: rgba(0,0,0,0.45);
-            color: #fff;
+            background: #fff0f0;
+            color: #c0392b;
         }
         .ba-overlay-label.after {
             right: 1.25rem;
-            background: var(--color-primary);
-            color: #fff;
+            background: #f0fff4;
+            color: #27ae60;
+        }
+
+        /* Structured comparison below slider */
+        .ba-structured {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: start;
+            margin-top: 1.75rem;
+        }
+
+        .ba-structured-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.875rem;
+        }
+
+        .ba-structured-col--before .ba-structured-label { color: #9ca3af; }
+        .ba-structured-col--after  .ba-structured-label { color: var(--color-primary); }
+
+        .ba-structured-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .ba-structured-list li {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .ba-structured-list--bad li::before {
+            content: '×';
+            color: #dc2626;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .ba-structured-list--good li {
+            font-weight: 500;
+            color: var(--color-gray-900);
+        }
+
+        .ba-structured-list--good li::before {
+            content: '✓';
+            color: #16a34a;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .ba-structured-arrow {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            padding-top: 1.75rem;
+            user-select: none;
+        }
+
+        @media (max-width: 600px) {
+            .ba-structured {
+                grid-template-columns: 1fr;
+            }
+            .ba-structured-arrow {
+                text-align: center;
+                padding-top: 0;
+                transform: rotate(90deg);
+            }
         }
 
         /* Tags below slider */
@@ -1913,6 +1988,39 @@
             .csu-callouts { grid-template-columns: 1fr; }
             .csu-brief { flex-direction: column; }
             .csu-metrics { width: 100%; justify-content: flex-start; }
+        }
+
+        /* ---- Manifesto Statement ---- */
+        .manifesto-statement {
+            background: var(--color-gray-100);
+            padding: var(--spacing-xl) 0 var(--spacing-md);
+        }
+
+        .manifesto-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .manifesto-rule {
+            width: 100%;
+            border: none;
+            border-top: 1px solid var(--color-gray-300);
+        }
+
+        .manifesto-text {
+            font-family: var(--font-primary);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            text-align: center;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin: 0;
         }
 
         /* ---- Hero Risk Reversal ---- */
@@ -3085,13 +3193,12 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;"><img src="images/logo.svg" alt="Wortkraftmaster" style="height: 40px;">Wortkraftmaster</a>
+                <a href="#" class="logo" style="display: flex; align-items: center; gap: 10px;"><img src="images/logo.svg" alt="Wortkraftmaster" style="height: 40px;">Wortkraftmaster</a>
                 <ul class="nav-menu">
-                    <li><a href="#how-i-help">Kako mogu pomoći</a></li>
-                    <li><a href="#process">Suradnja</a></li>
+                    <li><a href="#problem">Kako funkcionira</a></li>
+                    <li><a href="#before-after">Primjer</a></li>
                     <li><a href="#about">O meni</a></li>
                     <li><a href="#free-analysis">Besplatna analiza</a></li>
-                    <li><a href="#faq">FAQ</a></li>
                 </ul>
                 <button class="mobile-menu-toggle" aria-label="Toggle menu">
                     <span></span>
@@ -3120,7 +3227,7 @@
                             <span class="text-gray"><span style="white-space: nowrap;">računovođe</span> <span style="white-space: nowrap;">kojima vjeruju.</span></span>
                         </span>
                     </h1>
-                    <p class="hero-subtitle">Pomažem računovodstvenim servisima izgraditi profesionalan online nastup koji gradi <span class="underline-text">povjerenje</span> i predstavlja kvalitetu njihovih usluga.</p>
+                    <p class="hero-subtitle">Pomažem računovodstvenim servisima da njihova web stranica predstavlja <span class="underline-text">kvalitetu usluge</span> koju svakodnevno pružaju svojim klijentima.</p>
 
                     <div class="hero-cta">
                         <button type="button" class="btn-primary btn-large js-open-dialog" data-dialog="hero">Zatražite besplatnu analizu</button>
@@ -3152,38 +3259,38 @@
     </section>
 
     <!-- Social Proof Strip -->
+    <!-- Credentials strip — after hero -->
     <div class="proof-strip">
         <div class="container">
             <div class="proof-strip-inner">
-                <span class="proof-strip-label">Uredi koji su poboljšali online nastup</span>
-                <div class="proof-strip-divider-v"></div>
                 <div class="proof-clients">
-                    <!-- Client 1 — INDUCO d.o.o. -->
                     <div class="proof-client">
-                        <span class="proof-client-avatar proof-client-avatar--logo">
-                            <img src="images/induco-logo.jpg" alt="INDUCO d.o.o.">
-                        </span>
                         <div class="proof-client-info">
-                            <span class="proof-client-name">INDUCO d.o.o.</span>
-                            <span class="proof-client-city">Tatjana Hlad</span>
+                            <span class="proof-client-name">10+ godina iskustva</span>
+                            <span class="proof-client-city">u razvoju poslovnih sustava</span>
                         </div>
-                        <span class="proof-client-stat">Profesionalan nastup</span>
                     </div>
-
                     <div class="proof-sep"></div>
-
-                    <!-- Client 2 — KS-KS KNJIGOVODSTVO d.o.o. -->
                     <div class="proof-client">
-                        <span class="proof-client-avatar proof-client-avatar--logo">
-                            <img src="images/ksks-logo.png" alt="KS-KS KNJIGOVODSTVO d.o.o.">
-                        </span>
                         <div class="proof-client-info">
-                            <span class="proof-client-name">KS-KS KNJIGOVODSTVO d.o.o.</span>
-                            <span class="proof-client-city">Sanja Klemenčić</span>
+                            <span class="proof-client-name">Financijski i fintech sektor</span>
+                            <span class="proof-client-city">pouzdanost i preciznost kao standard</span>
                         </div>
-                        <span class="proof-client-stat">Profesionalan nastup</span>
                     </div>
-
+                    <div class="proof-sep"></div>
+                    <div class="proof-client">
+                        <div class="proof-client-info">
+                            <span class="proof-client-name">Specijalizirano za računovodstvene servise</span>
+                            <span class="proof-client-city">specijalizirano iskustvo u sektoru</span>
+                        </div>
+                    </div>
+                    <div class="proof-sep"></div>
+                    <div class="proof-client">
+                        <div class="proof-client-info">
+                            <span class="proof-client-name">Microsoft Partner</span>
+                            <span class="proof-client-city">verificirani tehnološki partner</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3277,7 +3384,7 @@
                 <span class="title-line"><span class="text-black">Web stranica često</span></span>
                 <span class="title-line"><span class="text-gray">potvrđuje ili narušava prvi dojam.</span></span>
             </h2>
-            <p class="jt-conclusion-sub">Web stranica nije samo informativni kanal — ona je dio procesa donošenja odluke.</p>
+            <p class="jt-conclusion-sub">Web stranica nije samo informativni kanal — ona je dio procesa donošenja odluke. <br> Nije pitanje ima li vaš ured web stranicu — pitanje je predstavlja li ona <span class="underline-text">kvalitetu vašeg servisa</span>.</p>
         </div>
     </section>
 
@@ -3323,7 +3430,7 @@
     <!-- Panel 1: Case study uPlus -->
     <section id="case-study" class="s4-section">
         <div class="container">
-            <h2 class="ap-title">Case study: uPlus</h2>
+            <h2 class="ap-title">Case study: Kako je uPlus poboljšao prikaz kvalitete svoga servisa</h2>
 
             <!-- Client brief -->
             <div class="csu-brief">
@@ -3381,6 +3488,9 @@
                     </div>
                 </div>
             </div>
+
+            <p class="csu-context">Cijeli projekt imao je jedan mjerljiv ishod: da posjetitelj, već na prvom pogledu, razumije s kime radi. Stranica nije samo prikazivala usluge — bila je dokaz onoga što uPlus nudi.</p>
+			<br>
 
             <!-- Client quote -->
             <blockquote class="csu-quote">
@@ -3521,6 +3631,14 @@
         </div><!-- /analysis-content -->
     </div><!-- /analysis-block -->
 
+    <!-- Manifesto Statement -->
+    <section class="manifesto-statement">
+        <div class="manifesto-inner">
+            <hr class="manifesto-rule">
+            <p class="manifesto-text">Web stranica treba predstavljati kvalitetu vašeg servisa.</p>
+            <hr class="manifesto-rule">
+        </div>
+    </section>
 
     <!-- Before / After Section -->
     <section id="before-after" class="before-after">
@@ -3562,16 +3680,18 @@
             </div>
 
             <!-- Tags below -->
-            <div class="ba-tags-row">
-                <div class="ba-tags-group" id="baTagsBad">
-                    <span class="cs-tag ba-tag-bad">zastarjeli izgled</span>
-                    <span class="cs-tag ba-tag-bad">nejasna poruka</span>
-                    <span class="cs-tag ba-tag-bad">slab CTA</span>
+            <div class="ba-tags-row" style="display:grid;grid-template-columns:1fr 1fr;">
+                <div class="ba-tags-group" id="baTagsBad" style="justify-content:center;">
+                    <span class="cs-tag ba-tag-bad">Nejasno kome pomaže</span>
+                    <span class="cs-tag ba-tag-bad">Nema povjerenja</span>
+                    <span class="cs-tag ba-tag-bad">Slab poziv na kontakt</span>
+                    <span class="cs-tag ba-tag-bad">Nema referenci</span>
                 </div>
-                <div class="ba-tags-group" id="baTagsGood">
-                    <span class="cs-tag ba-tag-good">profesionalan nastup</span>
-                    <span class="cs-tag ba-tag-good">jasna vrijednost</span>
-                    <span class="cs-tag ba-tag-good">naglašeno povjerenje</span>
+                <div class="ba-tags-group" id="baTagsGood" style="justify-content:center;">
+                    <span class="cs-tag ba-tag-good">Jasno kome pomaže</span>
+                    <span class="cs-tag ba-tag-good">Istaknuta stručnost</span>
+                    <span class="cs-tag ba-tag-good">Profesionalniji dojam</span>
+                    <span class="cs-tag ba-tag-good">Jednostavan kontakt</span>
                 </div>
             </div>
 
@@ -3604,7 +3724,7 @@
                         Kroz rad na web stranicama za računovodstvene servise primijetio sam isti obrazac: potencijalni klijenti žele brzo procijeniti mogu li nekome vjerovati, razumije li njihove potrebe i djeluje li profesionalno.
                     </p>
                     <p class="about-description">
-                        Zato se ne fokusiram samo na dizajn. Moj cilj je izraditi web stranicu koja jasno predstavlja stručnost vašeg servisa, gradi povjerenje i ostavlja profesionalan dojam kod poduzetnika koji razmatraju suradnju.
+                        Zato se ne fokusiram samo na dizajn. Moj cilj je izraditi web stranicu koja jasno predstavlja stručnost i kvalitetu vašeg servisa, gradi povjerenje i ostavlja profesionalan dojam kod poduzetnika koji razmatraju suradnju.
                     </p>
                     <div class="about-stats">
                         <div class="stat">
@@ -3618,6 +3738,11 @@
                     </div>
                 </div>
             </div>
+            <blockquote class="about-pull-quote" style="margin-top: var(--spacing-xl);">
+                Zato se fokusiram na jedan cilj.<br>
+                Web stranica treba predstavljati <span class="underline-text">kvalitetu vašeg servisa</span>.<br>
+                Ne manje.
+            </blockquote>
         </div>
     </section>
 
@@ -3853,6 +3978,39 @@
             </div>
         </div>
     </section>
+
+    <!-- Client strip — above CTA -->
+    <div class="proof-strip">
+        <div class="container">
+            <div class="proof-strip-inner">
+                <span class="proof-strip-label">Uredi koji su poboljšali online nastup</span>
+                <div class="proof-strip-divider-v"></div>
+                <div class="proof-clients">
+                    <div class="proof-client">
+                        <span class="proof-client-avatar proof-client-avatar--logo">
+                            <img src="images/induco-logo.jpg" alt="INDUCO d.o.o.">
+                        </span>
+                        <div class="proof-client-info">
+                            <span class="proof-client-name">INDUCO d.o.o.</span>
+                            <span class="proof-client-city">Tatjana Hlad</span>
+                        </div>
+                        <span class="proof-client-stat">Nova web stranica</span>
+                    </div>
+                    <div class="proof-sep"></div>
+                    <div class="proof-client">
+                        <span class="proof-client-avatar proof-client-avatar--logo">
+                            <img src="images/ksks-logo.png" alt="KS-KS KNJIGOVODSTVO d.o.o.">
+                        </span>
+                        <div class="proof-client-info">
+                            <span class="proof-client-name">KS-KS KNJIGOVODSTVO d.o.o.</span>
+                            <span class="proof-client-city">Sanja Klemenčić</span>
+                        </div>
+                        <span class="proof-client-stat">Modernizacija online nastupa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Free Analysis Section -->
     <section id="free-analysis" class="pricing">

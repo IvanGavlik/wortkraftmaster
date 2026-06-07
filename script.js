@@ -536,22 +536,18 @@ const aboutObserver = new IntersectionObserver((entries) => {
                 // Clear all paragraphs before each run
                 descriptions.forEach(desc => { desc.textContent = ''; });
 
-                // Type first paragraph
-                console.log('Typing paragraph 1...');
-                typeWriter(descriptions[0], descriptions[0].dataset.originalText, 25).then(() => {
-                    console.log('Paragraph 1 complete, waiting 1s for paragraph 2...');
-                    setTimeout(() => {
-                        if (descriptions[1]) {
-                            console.log('Typing paragraph 2...');
-                            typeWriter(descriptions[1], descriptions[1].dataset.originalText, 25).then(() => {
-                                // Wait 3 seconds, then restart from the beginning
-                                setTimeout(runLoop, 3000);
-                            });
-                        } else {
-                            setTimeout(runLoop, 3000);
-                        }
-                    }, 1000);
-                });
+                function typeNext(index) {
+                    if (index >= descriptions.length) {
+                        setTimeout(runLoop, 3000);
+                        return;
+                    }
+                    typeWriter(descriptions[index], descriptions[index].dataset.originalText, 25).then(() => {
+                        const delay = index < descriptions.length - 1 ? 1000 : 30000;
+                        setTimeout(() => typeNext(index + 1), delay);
+                    });
+                }
+
+                typeNext(0);
             }
 
             runLoop();

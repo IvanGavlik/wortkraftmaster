@@ -1534,7 +1534,8 @@
 
         /* ---- Before/After Section ---- */
         .before-after {
-            padding: 2rem 0 1.5rem;
+            padding: calc(var(--spacing-xl) + 4rem) 0 1.5rem;
+            background: var(--color-gray-100);
         }
 
         #before-after .section-header {
@@ -1784,6 +1785,161 @@
             background: #f5f5f5;
             border-radius: 4px;
             border: 1px solid #eee;
+        }
+
+        /* ---- Case Study uPlus ---- */
+        .csu-brief {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .csu-context {
+            flex: 1;
+            min-width: 220px;
+            font-size: 0.95rem;
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .csu-metrics {
+            display: flex;
+            gap: 1.5rem;
+            flex-shrink: 0;
+            align-items: stretch;
+        }
+
+        .csu-metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.25rem;
+            width: 130px;
+            flex-shrink: 0;
+        }
+
+        .csu-metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+            margin-bottom: 0.35rem;
+        }
+
+        .csu-metric-label {
+            font-size: 0.72rem;
+            color: var(--color-gray-700);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .csu-screenshot-wrap {
+            margin-bottom: 1.75rem;
+        }
+
+        .csu-callouts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .csu-callout {
+            display: flex;
+            gap: 0.875rem;
+            align-items: flex-start;
+            background: var(--color-gray-100);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+        }
+
+        .csu-callout-num {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--color-primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .csu-callout-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            margin: 0 0 0.3rem;
+        }
+
+        .csu-callout-desc {
+            font-size: 0.82rem;
+            color: var(--color-gray-700);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .csu-quote {
+            border-left: 3px solid var(--color-primary);
+            padding-left: 1.25rem;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--color-gray-700);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .csu-cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-family: var(--font-primary);
+            font-style: normal;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+        }
+
+        @media (max-width: 768px) {
+            .csu-callouts { grid-template-columns: 1fr; }
+            .csu-brief { flex-direction: column; }
+            .csu-metrics { width: 100%; justify-content: flex-start; }
+        }
+
+        /* ---- Hero Risk Reversal ---- */
+        .hero-risk-reversal {
+            margin-top: 1rem;
+            font-size: 0.88rem;
+            color: var(--color-gray-700);
+            line-height: 1.6;
+            max-width: 420px;
+        }
+
+        .hero-risk-reversal strong {
+            color: var(--color-gray-900);
+            font-weight: 600;
+        }
+
+        /* ---- About Pull Quote ---- */
+        .about-pull-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+            color: var(--color-gray-900);
+            line-height: 1.65;
+            border-left: 4px solid var(--color-primary);
+            padding-left: 1.75rem;
+            margin: 0 0 var(--spacing-xl);
+            max-width: 780px;
         }
 
         /* ---- FAQ Section ---- */
@@ -2771,6 +2927,157 @@
             color: var(--color-gray-400);
             margin-top: 0.625rem;
         }
+
+        /* ---- Social Proof Strip ---- */
+        .proof-strip {
+            border-top: 1px solid var(--color-gray-200);
+            border-bottom: 1px solid var(--color-gray-200);
+            background: var(--color-gray-100);
+            padding: 1.25rem 0;
+        }
+
+        .proof-strip-inner {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .proof-strip-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--color-gray-700);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .proof-strip-divider-v {
+            width: 1px;
+            height: 2.5rem;
+            background: var(--color-gray-300);
+            flex-shrink: 0;
+        }
+
+        .proof-clients {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .proof-client {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+            min-width: 0;
+            padding: 0 1.5rem;
+        }
+
+        .proof-client:first-child {
+            padding-left: 0;
+        }
+
+        .proof-client-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-gray-900);
+            color: var(--color-white);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .proof-client-avatar--logo {
+            width: 88px;
+            height: 36px;
+            border-radius: 6px;
+            background: #fff;
+            border: 1px solid var(--color-gray-200);
+            padding: 4px 6px;
+        }
+
+        .proof-client-avatar--logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .proof-client-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .proof-client-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--color-gray-900);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .proof-client-city {
+            font-size: 0.72rem;
+            color: var(--color-gray-700);
+        }
+
+        .proof-client-stat {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            white-space: nowrap;
+            background: rgba(255, 55, 0, 0.07);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            flex-shrink: 0;
+        }
+
+        .proof-sep {
+            width: 1px;
+            height: 2.5rem;
+            background: var(--color-gray-200);
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .proof-strip-label,
+            .proof-strip-divider-v {
+                display: none;
+            }
+            .proof-client {
+                padding: 0 1rem;
+            }
+            .proof-client-stat {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .proof-clients {
+                gap: 1rem;
+            }
+            .proof-client {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 0;
+                gap: 0.35rem;
+            }
+            .proof-sep {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2813,10 +3120,11 @@
                             <span class="text-gray"><span style="white-space: nowrap;">računovođe</span> <span style="white-space: nowrap;">kojima vjeruju.</span></span>
                         </span>
                     </h1>
-                    <p class="hero-subtitle">Pomažem računovodstvenim i knjigovodstvenim uredima izgraditi profesionalan online nastup koji povećava <span class="underline-text">povjerenje</span>, jasno komunicira <span class="underline-text">stručnost</span> i jača njihov profesionalni <span class="underline-text">ugled</span> kod poduzetnika i firmi.</p>
+                    <p class="hero-subtitle">Pomažem računovodstvenim servisima izgraditi profesionalan online nastup koji gradi <span class="underline-text">povjerenje</span> i predstavlja kvalitetu njihovih usluga.</p>
 
                     <div class="hero-cta">
-                        <button type="button" class="btn-primary btn-large js-open-dialog" data-dialog="hero">Saznajte kako vašu tvrtku vide potencijalni klijenti</button>
+                        <button type="button" class="btn-primary btn-large js-open-dialog" data-dialog="hero">Zatražite besplatnu analizu</button>
+                        <p class="hero-risk-reversal"><strong>Niste sigurni treba li vam nova web stranica?</strong><br>Zato prvo nudim besplatnu analizu i konkretne prijedloge.</p>
                     </div>
                 </div>
 
@@ -2842,6 +3150,44 @@
             </div>
         </div>
     </section>
+
+    <!-- Social Proof Strip -->
+    <div class="proof-strip">
+        <div class="container">
+            <div class="proof-strip-inner">
+                <span class="proof-strip-label">Uredi koji su poboljšali online nastup</span>
+                <div class="proof-strip-divider-v"></div>
+                <div class="proof-clients">
+                    <!-- Client 1 — INDUCO d.o.o. -->
+                    <div class="proof-client">
+                        <span class="proof-client-avatar proof-client-avatar--logo">
+                            <img src="images/induco-logo.jpg" alt="INDUCO d.o.o.">
+                        </span>
+                        <div class="proof-client-info">
+                            <span class="proof-client-name">INDUCO d.o.o.</span>
+                            <span class="proof-client-city">Tatjana Hlad</span>
+                        </div>
+                        <span class="proof-client-stat">Profesionalan nastup</span>
+                    </div>
+
+                    <div class="proof-sep"></div>
+
+                    <!-- Client 2 — KS-KS KNJIGOVODSTVO d.o.o. -->
+                    <div class="proof-client">
+                        <span class="proof-client-avatar proof-client-avatar--logo">
+                            <img src="images/ksks-logo.png" alt="KS-KS KNJIGOVODSTVO d.o.o.">
+                        </span>
+                        <div class="proof-client-info">
+                            <span class="proof-client-name">KS-KS KNJIGOVODSTVO d.o.o.</span>
+                            <span class="proof-client-city">Sanja Klemenčić</span>
+                        </div>
+                        <span class="proof-client-stat">Profesionalan nastup</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Problem Section -->
     <section id="problem" class="problem-section">
@@ -2941,23 +3287,30 @@
         <!-- Sticky left nav -->
         <aside class="analysis-nav">
             <nav class="anav-list">
-                <div class="anav-item" data-section="kvaliteta">
+                <div class="anav-item" data-section="case-study">
                     <div class="anav-step-col">
                         <span class="anav-num">1</span>
+                        <div class="anav-connector"></div>
+                    </div>
+                    <span class="anav-text">Case study uPlus</span>
+                </div>
+                <div class="anav-item" data-section="kvaliteta">
+                    <div class="anav-step-col">
+                        <span class="anav-num">2</span>
                         <div class="anav-connector"></div>
                     </div>
                     <span class="anav-text">Što poduzetnik želi saznati?</span>
                 </div>
                 <div class="anav-item" data-section="povjerenje">
                     <div class="anav-step-col">
-                        <span class="anav-num">2</span>
+                        <span class="anav-num">3</span>
                         <div class="anav-connector"></div>
                     </div>
                     <span class="anav-text">Kako nastaje povjerenje?</span>
                 </div>
                 <div class="anav-item" data-section="transformacija">
                     <div class="anav-step-col">
-                        <span class="anav-num">3</span>
+                        <span class="anav-num">4</span>
                     </div>
                     <span class="anav-text">Predstavlja li web kvalitetu?</span>
                 </div>
@@ -2967,7 +3320,78 @@
         <!-- Scrollable right content -->
         <div class="analysis-content">
 
-    <!-- Panel 1: Što poduzetnik želi saznati -->
+    <!-- Panel 1: Case study uPlus -->
+    <section id="case-study" class="s4-section">
+        <div class="container">
+            <h2 class="ap-title">Case study: uPlus</h2>
+
+            <!-- Client brief -->
+            <div class="csu-brief">
+                <p class="csu-context">uPlus je računovodstveni servis koji je trebao web stranicu koja gradi povjerenje kod novih poduzetnika — ne samo popis usluga, nego dokaz stručnosti i profesionalnog pristupa.</p>
+                <div class="csu-metrics">
+                    <div class="csu-metric">
+                        <span class="csu-metric-value">↑</span>
+                        <span class="csu-metric-label">profesionalan prvi dojam</span>
+                    </div>
+                    <div class="csu-metric">
+                        <span class="csu-metric-value">↓</span>
+                        <span class="csu-metric-label">manje slučajnih upita, više ozbiljnih klijenata</span>
+                    </div>
+                    <div class="csu-metric">
+                        <span class="csu-metric-value">⏱</span>
+                        <span class="csu-metric-label">manje vremena na ponavljanje istih informacija</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Annotated screenshot -->
+            <div class="csu-screenshot-wrap">
+                <div class="cs-monitor-wrap" style="max-width: 100%;">
+                    <div class="cs-monitor-frame">
+                        <div class="cs-monitor-screen">
+                            <img src="images/uplus.png" alt="uPlus web stranica" class="cs-screenshot loaded">
+                        </div>
+                    </div>
+                    <div class="cs-monitor-neck"></div>
+                    <div class="cs-monitor-foot"></div>
+                </div>
+            </div>
+
+            <!-- Callout cards — proof that teaches -->
+            <div class="csu-callouts">
+                <div class="csu-callout">
+                    <span class="csu-callout-num">1</span>
+                    <div class="csu-callout-body">
+                        <h4 class="csu-callout-title">Testimonial blok</h4>
+                        <p class="csu-callout-desc">Stvarni klijenti, stvarna iskustva — postavljeno odmah ispod heroja da potvrde prvi dojam.</p>
+                    </div>
+                </div>
+                <div class="csu-callout">
+                    <span class="csu-callout-num">2</span>
+                    <div class="csu-callout-body">
+                        <h4 class="csu-callout-title">Jasan CTA</h4>
+                        <p class="csu-callout-desc">Jedna radnja, vidljiva u svakom trenutku — bez zbunjivanja posjetitelja s više opcija.</p>
+                    </div>
+                </div>
+                <div class="csu-callout">
+                    <span class="csu-callout-num">3</span>
+                    <div class="csu-callout-body">
+                        <h4 class="csu-callout-title">Stranica usluga</h4>
+                        <p class="csu-callout-desc">Konkretni paketi s jasnim opisima — poduzetnik odmah razumije što dobiva i za koga je servis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client quote -->
+            <blockquote class="csu-quote">
+                "Stranica je točno ono što sam trebao — profesionalno, jasno i bez nepotrebnih komplikacija."
+                <cite class="csu-cite">— uPlus</cite>
+            </blockquote>
+
+        </div>
+    </section>
+
+    <!-- Panel 2: Što poduzetnik želi saznati -->
     <section id="kvaliteta" class="s4-section">
         <div class="container">
             <h2 class="ap-title">Što poduzetnik zapravo procjenjuje?</h2>
@@ -3089,7 +3513,7 @@
             <!-- CTA -->
             <div class="ap-cta-block">
                 <p>Ovo su samo 4 od više od 35 pitanja koja zajedno daju jasnu sliku o tome koliko vaša web stranica gradi povjerenje kod potencijalnih klijenata.</p>
-                <button type="button" class="btn-primary btn-large js-open-dialog" data-dialog="assessment">Brza procjena</button>
+                <button type="button" class="btn-primary btn-large js-open-dialog" data-dialog="assessment">Zatražite besplatnu analizu</button>
             </div>
         </div>
     </section>
@@ -3097,76 +3521,6 @@
         </div><!-- /analysis-content -->
     </div><!-- /analysis-block -->
 
-    <!-- How I Help Section -->
-    <section id="how-i-help" class="how-i-help">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="nws-headline">Kako kvalitetna web stranica pomaže vašem servisu?</h2>
-            </div>
-            <div class="benefits-list">
-                <div class="benefit-item">
-                    <span class="benefit-number">01</span>
-                    <h3 class="benefit-title">Profesionalan prvi dojam</h3>
-                    <p class="benefit-desc">Web stranica koja odražava kvalitetu vaših usluga.</p>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-number">02</span>
-                    <h3 class="benefit-title">Izgradnja povjerenja</h3>
-                    <p class="benefit-desc">Reference, iskustvo, tim i stručnost prikazani na pravi način.</p>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-number">03</span>
-                    <h3 class="benefit-title">Jasno predstavljanje usluga</h3>
-                    <p class="benefit-desc">Da klijenti odmah razumiju što nudite.</p>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-number">04</span>
-                    <h3 class="benefit-title">Kvalitetniji upiti</h3>
-                    <p class="benefit-desc">Manje slučajnih upita, više ozbiljnih poduzetnika.</p>
-                </div>
-                <div class="benefit-item">
-                    <span class="benefit-number">05</span>
-                    <h3 class="benefit-title">Ušteda vremena</h3>
-                    <p class="benefit-desc">Manje ponavljanja istih informacija potencijalnim klijentima.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">O meni</span>
-            </div>
-            <div class="about-content">
-                <div class="about-visual">
-                    <div class="about-image">
-                        <img src="images/me.png" alt="Ivan Gavlik" class="about-photo">
-                    </div>
-                </div>
-                <div class="about-text">
-                    <h2 class="section-title">Osnivač</h2>
-                    <p class="about-description">
-                        Ja sam Ivan, softverski programer koji voli pomagati tvrtkama da zasijaju na internetu. Kreiram profesionalne, interaktivne i SEO prijateljske web stranice koje su jednostavne za korištenje i izgrađene za trajanje — podržane s 10 godina iskustva u financijama, e-trgovini i sustavima za prodaju karata.
-                    </p>
-                    <p class="about-description">
-                        Povedimo vaš posao online na način kojim možete biti ponosni.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Godina iskustva</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Zadovoljstvo klijenata</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Before / After Section -->
     <section id="before-after" class="before-after">
@@ -3221,6 +3575,49 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Zašto računovodstveni servisi</span>
+            </div>
+            <blockquote class="about-pull-quote">
+                Računovodstveni servisi ne prodaju proizvod.<br>
+                Oni prodaju povjerenje, stručnost i dugoročne poslovne odnose.<br>
+                Upravo zato web stranica mora biti više od online posjetnice.
+            </blockquote>
+            <div class="about-content">
+                <div class="about-visual">
+                    <div class="about-image">
+                        <img src="images/me.png" alt="Ivan Gavlik" class="about-photo">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2 class="section-title">Osnivač</h2>
+                    <p class="about-description">
+                        Ja sam Ivan, softverski inženjer s više od 10 godina iskustva u razvoju poslovnih sustava za financijski, fintech i e-commerce sektor. Tijekom karijere radio sam na projektima gdje su pouzdanost, profesionalnost i korisničko iskustvo bili ključni za uspjeh.
+                    </p>
+                    <p class="about-description">
+                        Kroz rad na web stranicama za računovodstvene servise primijetio sam isti obrazac: potencijalni klijenti žele brzo procijeniti mogu li nekome vjerovati, razumije li njihove potrebe i djeluje li profesionalno.
+                    </p>
+                    <p class="about-description">
+                        Zato se ne fokusiram samo na dizajn. Moj cilj je izraditi web stranicu koja jasno predstavlja stručnost vašeg servisa, gradi povjerenje i ostavlja profesionalan dojam kod poduzetnika koji razmatraju suradnju.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Godina iskustva</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Zadovoljstvo klijenata</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -3614,15 +4011,6 @@
                             <p>U tom slučaju dobivate jasne smjernice i pomoć kako bi tekst bio prilagođen web stranici i razumljiv vašim posjetiteljima.</p>
                         </div></div>
                     </div>
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Koliko košta?
-                            <span class="faq-icon">+</span>
-                        </button>
-                        <div class="faq-answer"><div class="faq-answer-inner">
-                            <p>Cijena izrade web stranice je po dogovoru i ovisi o opsegu projekta. Za jednostavnije stranice cijena kreće od <strong>300 €</strong> pa naviše.</p>
-                        </div></div>
-                    </div>
                 </div>
 
             </div>
@@ -3863,14 +4251,14 @@
         // Analysis block — scrollspy + click-to-scroll
         (function () {
             const navItems   = document.querySelectorAll('.anav-item');
-            const sectionIds = ['kvaliteta', 'povjerenje', 'transformacija'];
+            const sectionIds = ['case-study', 'kvaliteta', 'povjerenje', 'transformacija'];
             if (!navItems.length) return;
 
             function setActive(id) {
                 navItems.forEach(item => item.classList.toggle('active', item.dataset.section === id));
             }
 
-            setActive('kvaliteta');
+            setActive('case-study');
 
             // Click nav item → smooth scroll to section
             navItems.forEach(item => {

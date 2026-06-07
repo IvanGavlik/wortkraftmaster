@@ -339,8 +339,19 @@
 
         @media (max-width: 768px) {
             .jt-timeline {
-                grid-template-columns: 1fr;
-                gap: 1.5rem 0;
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                margin: var(--spacing-xl) calc(-1 * var(--container-padding)) var(--spacing-md);
+                padding: 0 var(--container-padding) 1rem;
+                scrollbar-width: none;
+            }
+
+            .jt-timeline::-webkit-scrollbar {
+                display: none;
             }
 
             .jt-timeline::before,
@@ -349,19 +360,21 @@
             }
 
             .jt-step {
-                flex-direction: row;
+                flex: 0 0 82%;
+                flex-direction: column;
                 text-align: left;
                 align-items: flex-start;
                 gap: 1rem;
+                scroll-snap-align: start;
+                padding-right: 1rem;
             }
 
             .jt-circle {
-                margin-bottom: 0;
-                flex-shrink: 0;
+                display: none;
             }
 
             .jt-card {
-                flex: 1;
+                width: 100%;
                 opacity: 1 !important;
                 transform: none !important;
             }
@@ -374,6 +387,35 @@
             .jt-icon {
                 width: 34px;
                 height: 34px;
+            }
+        }
+
+        .jt-dots {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .jt-dots {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-bottom: var(--spacing-md);
+            }
+
+            .jt-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: var(--color-gray-300);
+                border: none;
+                padding: 0;
+                cursor: pointer;
+                transition: background 0.2s ease, transform 0.2s ease;
+            }
+
+            .jt-dot.active {
+                background: var(--color-primary);
+                transform: scale(1.25);
             }
         }
 
@@ -2420,6 +2462,33 @@
         @media (max-width: 768px) {
             .ap-cards-grid { grid-template-columns: repeat(2, 1fr); }
             .ap-compare    { grid-template-columns: 1fr; }
+
+            .ap-question {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .ap-score-btns {
+                width: 100%;
+                justify-content: flex-start;
+                gap: 0.625rem;
+            }
+
+            .ap-score-btn {
+                flex: 1;
+                height: 48px;
+                font-size: 1rem;
+            }
+
+            .ap-score-legend {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .ap-score-pill {
+                width: 100%;
+            }
         }
 
         /* ---- Process Timeline ---- */
@@ -3171,6 +3240,20 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .proof-strip,
+            .testimonials,
+            .hero-video-side {
+                display: none;
+            }
+
+            .analysis-content #case-study,
+            .analysis-content #kvaliteta,
+            .analysis-content #povjerenje {
+                display: none;
+            }
+        }
+
         @media (max-width: 600px) {
             .proof-clients {
                 gap: 1rem;
@@ -3373,6 +3456,14 @@
                         <p class="jt-step-desc">Ako odgovor na prethodna pitanja ulijeva povjerenje, poduzetnik šalje upit.</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Mobile swipe dots -->
+            <div class="jt-dots" id="jtDots">
+                <button class="jt-dot active"></button>
+                <button class="jt-dot"></button>
+                <button class="jt-dot"></button>
+                <button class="jt-dot"></button>
             </div>
 
         </div>
@@ -4404,6 +4495,29 @@
                 }
             }, { threshold: 0.25 });
             obs.observe(tl);
+        })();
+
+        // Journey timeline — mobile swipe dots
+        (function () {
+            const timeline = document.querySelector('.jt-timeline');
+            const dots     = document.querySelectorAll('.jt-dot');
+            const steps    = document.querySelectorAll('.jt-step');
+            if (!timeline || !dots.length) return;
+
+            function updateDots() {
+                const stepW = steps[0] ? steps[0].offsetWidth : timeline.offsetWidth * 0.82;
+                const idx   = Math.round(timeline.scrollLeft / stepW);
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            }
+
+            timeline.addEventListener('scroll', updateDots, { passive: true });
+
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    const stepW = steps[0] ? steps[0].offsetWidth : timeline.offsetWidth * 0.82;
+                    timeline.scrollTo({ left: i * stepW, behavior: 'smooth' });
+                });
+            });
         })();
 
         // Analysis block — scrollspy + click-to-scroll
